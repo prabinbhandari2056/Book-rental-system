@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -24,6 +25,7 @@ public class Book {
 
     @Column(name = "book_name")
     @NotNull
+    @Size(max = 100,min = 5)
     private String bookName;
 
     @Column(name = "no_of_pages")
@@ -32,6 +34,7 @@ public class Book {
 
     @Column(name = "isbn")
     @NotNull
+    @Size(max = 30)
     private String isbn;
 
     @Column(name = "rating")
@@ -48,6 +51,7 @@ public class Book {
 
     @Column(name = "photo")
     @NotNull
+    @Size(max = 200)
     private String photo;
 
     @ManyToOne
