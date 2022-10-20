@@ -1,12 +1,14 @@
 package com.example.bookrentalsystem.pojo;
 
+import antlr.collections.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -38,5 +40,5 @@ public class BookDetailRequestPojo {
 
     private Integer categoryId;
 
-    private List<Integer> authorId;
+    private Iterable<Integer> authorId;
 }
