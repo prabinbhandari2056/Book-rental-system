@@ -2,6 +2,7 @@ package com.example.bookrentalsystem.pojo;
 
 
 import lombok.*;
+import org.springframework.stereotype.Service;
 
 @Getter
 @Setter
@@ -9,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 
+@Service
 public class ApiResponse {
     private Integer status;
 

@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_book")
@@ -54,11 +55,15 @@ public class Book {
     @Size(max = 200)
     private String photo;
 
-    @ManyToOne
-    @JoinColumn( name = "category_id", referencedColumnName = "category_id", foreignKey = @ForeignKey(name = "FK_book_category"))
+    @ManyToOne(targetEntity = Category.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id", foreignKey = @ForeignKey(name = "FK_book_category"))
     private  Category category;
 
+//    @OneToMany
+//    @JoinColumn( name = "author_id", referencedColumnName = "author_id", foreignKey = @ForeignKey(name = "FK_book_author"))
 
-
+    @ManyToMany(targetEntity = Author.class,cascade = CascadeType.ALL)
+    @JoinColumn(name ="author_id",referencedColumnName = "author_id")
+    private List<Author>  author;
 }
 

@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Getter
@@ -19,8 +20,10 @@ import java.util.Date;
 @Service
 public class BookTransactionDetailRequestPojo {
 
+
     private Integer bookTransactionId;
 
+    @NotNull
     private Integer bookId;
 
     private String code;
@@ -32,7 +35,7 @@ public class BookTransactionDetailRequestPojo {
 
     private RentType rentType;
 
-
+    @NotNull
     private Integer memberId;
 
     private String status;

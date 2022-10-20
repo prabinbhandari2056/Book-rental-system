@@ -3,6 +3,7 @@ package com.example.bookrentalsystem.controller;
 import com.example.bookrentalsystem.model.Book;
 import com.example.bookrentalsystem.pojo.ApiResponse;
 import com.example.bookrentalsystem.pojo.BookDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.BookTransactionDetailRequestPojo;
 import com.example.bookrentalsystem.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,4 +35,11 @@ public class BookController extends ApiResponse{
     public ApiResponse getBookById(@PathVariable(name = "bookId") Integer bookId) {
         return success("Book data fetched successuflly", bookService.getBookById(bookId));
     }
+    @PostMapping("updatestock")
+    public ApiResponse updateBookStock(@RequestBody @Valid BookDetailRequestPojo bookDetailRequestPojo){
+        bookService.updateBookStock(bookDetailRequestPojo);
+        return success("Book Stock updated Successfully", null);
+    }
+
 }
+

@@ -25,6 +25,10 @@ public class Member {
     @NotNull
     private  String email;
 
+    @Column(name = "name")
+    @NotNull
+    private String name;
+
     @Column(name = "mobile_no")
     private String mobileNo;
 

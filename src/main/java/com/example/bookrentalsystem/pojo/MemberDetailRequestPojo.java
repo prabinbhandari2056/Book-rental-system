@@ -19,6 +19,8 @@ public class MemberDetailRequestPojo {
 
     private  String email;
 
+    private String name;
+
     private String mobileNo;
 
     private String address;
