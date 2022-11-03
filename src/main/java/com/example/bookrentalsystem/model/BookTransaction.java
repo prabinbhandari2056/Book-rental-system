@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -30,10 +31,10 @@ public class BookTransaction {
     private String code;
 
     @Column(name = "from_date")
-    private Date fromDate;
+    private LocalDate fromDate;
 
     @Column(name = "to_date")
-    private Date toDate;
+    private LocalDate toDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "rent_status")

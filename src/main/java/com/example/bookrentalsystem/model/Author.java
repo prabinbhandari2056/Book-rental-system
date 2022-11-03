@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tbl_author")
+@Table(name = "tbl_author",uniqueConstraints = {@UniqueConstraint(columnNames = "author_email", name = "UNIQUE_tbl_author_author_email")})
 public class Author {
     @Id
     @SequenceGenerator(sequenceName = "tbl_author_seq_gen", name = "tbl_author_seq", allocationSize = 1)

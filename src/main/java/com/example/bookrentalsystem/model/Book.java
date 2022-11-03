@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class Book {
 
     @Column(name = "rating")
     @NotNull
-    private double rating;
+    private Double rating;
 
     @Column(name = "stock_count")
     @NotNull
@@ -48,7 +49,7 @@ public class Book {
 
     @Column(name = "published_date")
     @NotNull
-    private Date publishedDate;
+    private LocalDate publishedDate;
 
     @Column(name = "photo")
     @NotNull

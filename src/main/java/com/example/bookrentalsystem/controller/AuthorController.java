@@ -1,14 +1,16 @@
 package com.example.bookrentalsystem.controller;
-
 import com.example.bookrentalsystem.model.Author;
 import com.example.bookrentalsystem.pojo.ApiResponse;
 import com.example.bookrentalsystem.pojo.AuthorDetailRequestPojo;
-import com.example.bookrentalsystem.service.AuthorService;
+import com.example.bookrentalsystem.service.author.AuthorService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * This class is used to save and update author.
+ */
 @RestController
 @RequestMapping("bookrental/author")
 public class AuthorController extends ApiResponse {
@@ -18,19 +20,24 @@ public class AuthorController extends ApiResponse {
         this.authorService = authorService;
     }
 
-    @GetMapping("getauthor")
-    public List<Author> getAuthor() {
-        return authorService.getAuthor();
+    /**
+     * It returns all data from databases.
+     * @return List of Authors.
+     */
+    @Operation(description = "It returns all data from databases ",summary = "Author controller")
+    @GetMapping()
+    public  ApiResponse  getAuthor() {
+        return  success( get("data.get","Author"),authorService.getAuthor());
     }
 
-    @PostMapping("saveauthor")
-    public ApiResponse saveAuthorDetails(@RequestBody @Valid AuthorDetailRequestPojo authorDetailRequestPojo){
-            authorService.saveAuthorDetails(authorDetailRequestPojo);
-            return success("Author Saved Successfully", null);
+    @PostMapping()
+    public ApiResponse saveAuthorDetails(@RequestBody @Valid AuthorDetailRequestPojo authorDetailRequestPojo) {
+        authorService.saveAuthorDetails(authorDetailRequestPojo);
+        return success(get("data.save","Author"), null);
     }
 
-    @GetMapping("getauthor/{authorId}")
-    public ApiResponse getAuthorById(@PathVariable(name = "authorId") Integer authorId) {
-        return success("Student data fetched successuflly", authorService.getAuthorById(authorId));
+    @GetMapping("/{authorid}")
+    public ApiResponse getAuthorById(@PathVariable(name = "authorid") Integer authorId) {
+        return success(get("data.get","Author"), authorService.getAuthorById(authorId));
     }
 }

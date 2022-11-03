@@ -1,4 +1,4 @@
-package com.example.bookrentalsystem.service;
+package com.example.bookrentalsystem.service.member;
 
 import com.example.bookrentalsystem.model.Author;
 import com.example.bookrentalsystem.model.Member;

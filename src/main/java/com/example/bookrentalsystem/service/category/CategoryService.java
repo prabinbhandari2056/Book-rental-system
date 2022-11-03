@@ -1,4 +1,4 @@
-package com.example.bookrentalsystem.service;
+package com.example.bookrentalsystem.service.category;
 
 import com.example.bookrentalsystem.model.Category;
 import com.example.bookrentalsystem.pojo.CategoryDetailRequestPojo;

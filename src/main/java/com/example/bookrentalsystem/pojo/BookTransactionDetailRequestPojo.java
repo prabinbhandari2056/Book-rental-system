@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -28,9 +29,9 @@ public class BookTransactionDetailRequestPojo {
 
     private String code;
 
-    private Date fromDate;
+    private LocalDate fromDate;
 
-    private Date toDate;
+    private LocalDate toDate;
 
 
     private RentType rentType;

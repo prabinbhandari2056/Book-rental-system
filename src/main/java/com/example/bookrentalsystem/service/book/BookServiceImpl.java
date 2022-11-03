@@ -1,5 +1,6 @@
-package com.example.bookrentalsystem.service;
+package com.example.bookrentalsystem.service.book;
 
+import com.example.bookrentalsystem.globalException.CustomExceptionHandler;
 import com.example.bookrentalsystem.mapper.BookDetailMapper;
 import com.example.bookrentalsystem.model.Author;
 import com.example.bookrentalsystem.model.Book;
@@ -41,20 +42,22 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public void saveBookDetails(BookDetailRequestPojo bookDetailRequestPojo) {
+    public void saveBookDetails(BookDetailRequestPojo bookDetailRequestPojo) throws CustomExceptionHandler {
         Book book = null;
-//        BookAuthor bookAuthor=null;
         if (bookDetailRequestPojo.getBookId()!= null)
             book = bookRepository.findById(bookDetailRequestPojo.getBookId()).orElse(new Book());
         book = objectMapper.convertValue(bookDetailRequestPojo, Book.class);
 
-        Category category=categoryRepository.findById(bookDetailRequestPojo.getCategoryId()).orElseThrow(()->new RuntimeException("Category does not exist by category id"));
+        Category category=categoryRepository.findById(bookDetailRequestPojo.getCategoryId()).orElseThrow(()->new CustomExceptionHandler("Category does not exist by category id"));
         book.setCategory(category);
         List<Author> authors=authorRepository.findAllById(bookDetailRequestPojo.getAuthorId());
+        if (authors.size()!=bookDetailRequestPojo.getAuthorId().size())
+            throw new CustomExceptionHandler("Authors does not exist");
         book.setAuthor(authors);
-
         bookRepository.save(book);
-    }
+}
+
+
 
     @Override
     public List<Book> getBook() {

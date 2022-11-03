@@ -1,15 +1,18 @@
 package com.example.bookrentalsystem.controller;
 
+import com.example.bookrentalsystem.globalException.CustomExceptionHandler;
 import com.example.bookrentalsystem.model.Book;
 import com.example.bookrentalsystem.pojo.ApiResponse;
 import com.example.bookrentalsystem.pojo.BookDetailRequestPojo;
-import com.example.bookrentalsystem.pojo.BookTransactionDetailRequestPojo;
-import com.example.bookrentalsystem.service.BookService;
+import com.example.bookrentalsystem.service.book.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * This controller returns book details and save book details.
+ */
 @RestController
 @RequestMapping("bookrental/book")
 public class BookController extends ApiResponse{
@@ -20,26 +23,31 @@ public class BookController extends ApiResponse{
     }
 
 
-    @GetMapping("getbook")
-    public List<Book> getBook() {
-        return bookService.getBook();
+    @GetMapping()
+    public ApiResponse getBook() {
+        return success(get("data.get","Book"),bookService.getBook());
     }
 
-    @PostMapping("savebook")
-    public ApiResponse saveBookDetails(@RequestBody @Valid BookDetailRequestPojo bookDetailRequestPojo){
+
+    /**
+     * This function saves the book details
+     * @param bookDetailRequestPojo
+     * @return saveBookDetails
+     */
+    @PostMapping()
+    public ApiResponse saveBookDetails(@RequestBody @Valid BookDetailRequestPojo bookDetailRequestPojo) throws CustomExceptionHandler {
         bookService.saveBookDetails(bookDetailRequestPojo);
-        return success("Book Saved Successfully", null);
+        return success(get("data.save","Book"), null);
     }
 
-    @GetMapping("getbook/{bookId}")
-    public ApiResponse getBookById(@PathVariable(name = "bookId") Integer bookId) {
-        return success("Book data fetched successuflly", bookService.getBookById(bookId));
+    @GetMapping("/{bookid}")
+    public ApiResponse getBookById(@PathVariable(name = "bookid") Integer bookId) {
+        return success(get("data.get","Book"), bookService.getBookById(bookId));
     }
-    @PostMapping("updatestock")
+    @PostMapping("update-stock")
     public ApiResponse updateBookStock(@RequestBody @Valid BookDetailRequestPojo bookDetailRequestPojo){
         bookService.updateBookStock(bookDetailRequestPojo);
-        return success("Book Stock updated Successfully", null);
+        return success(get("data.update.stock","Book"), null);
     }
-
 }
 

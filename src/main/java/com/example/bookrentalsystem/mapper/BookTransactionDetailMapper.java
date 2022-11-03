@@ -19,12 +19,12 @@ public interface BookTransactionDetailMapper {
     @Select("select *  from tbl_book_transaction where \"member_id\"=#{memberId}")
     Optional<MemberDetailResponsePojo> findMember(Integer memberId);
 
-    @Select("select case when rent_status='RENT' then true else false end from tbl_book_transaction where \"member_id\"=#{memberId}")
-//    @Select("select case when rent_status='Rent' then false else true end from tbl_book_transaction where \"member_id\"=#{memberId}")
-    String getRentStatus(Integer memberId);
+//    @Select("select case when rent_status='RENT' then true else false end from tbl_book_transaction where \"member_id\"=#{memberId}")
+    @Select("select case when rent_status<>'RENT' or rent_status is null then true else false end from tbl_book_transaction where \"member_id\"=#{memberId}")
+    Boolean getRentStatus(Integer memberId);
 
-    @Select("select rent_status from  tbl_book_transaction where \"member_id\"=#{memberId}")
-//    @Select("select case when rent_status='Rent' then false else true end from tbl_book_transaction where \"member_id\"=#{memberId}")
+//    @Select("select rent_status from  tbl_book_transaction where \"member_id\"=#{memberId}")
+    @Select("select case when rent_status='Rent' then true else false end from tbl_book_transaction where \"member_id\"=#{memberId}")
     String getRentStatus2(Integer memberId);
 
     @Select("select stock_count from tbl_book where \"book_id\" = #{bookId}")

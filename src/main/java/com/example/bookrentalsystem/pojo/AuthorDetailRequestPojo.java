@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Getter
@@ -18,7 +19,9 @@ public class AuthorDetailRequestPojo {
 
     private Integer authorId;
 
+    @NotNull
     private  String authorName;
+
 
     private String authorEmail;
 

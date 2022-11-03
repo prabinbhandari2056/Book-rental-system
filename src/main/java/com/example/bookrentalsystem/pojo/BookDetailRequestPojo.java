@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,18 +27,19 @@ public class BookDetailRequestPojo {
     private String isbn;
 
 
-    private double rating;
+    private Double rating;
 
 
     private Integer stockCount;
 
-    private Date publishedDate;
+    private LocalDate publishedDate;
 
 
     private String photo;
 
-
+    @NotNull
     private Integer categoryId;
 
+    @NotNull
     private List<Integer> authorId;
 }

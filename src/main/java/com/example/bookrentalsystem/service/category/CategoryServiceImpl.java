@@ -1,7 +1,6 @@
-package com.example.bookrentalsystem.service;
+package com.example.bookrentalsystem.service.category;
 
 import com.example.bookrentalsystem.mapper.CategoryDetailMapper;
-import com.example.bookrentalsystem.model.Author;
 import com.example.bookrentalsystem.model.Category;
 import com.example.bookrentalsystem.pojo.CategoryDetailRequestPojo;
 import com.example.bookrentalsystem.repository.CategoryRepository;

@@ -1,11 +1,9 @@
 package com.example.bookrentalsystem.controller;
 
-import com.example.bookrentalsystem.model.Author;
 import com.example.bookrentalsystem.model.Category;
 import com.example.bookrentalsystem.pojo.ApiResponse;
-import com.example.bookrentalsystem.pojo.AuthorDetailRequestPojo;
 import com.example.bookrentalsystem.pojo.CategoryDetailRequestPojo;
-import com.example.bookrentalsystem.service.CategoryService;
+import com.example.bookrentalsystem.service.category.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,19 +19,19 @@ public class CategoryController extends ApiResponse{
         this.categoryService = categoryService;
     }
 
-    @PostMapping("savecategory")
+    @PostMapping()
     public ApiResponse saveCategoryDetails(@RequestBody @Valid CategoryDetailRequestPojo categoryDetailRequestPojo){
         categoryService.saveCategoryDetails(categoryDetailRequestPojo);
-        return success("Category Saved Successfully", null);
+        return success(get("data.save","Category"), null);
     }
-    @GetMapping("getcategory/{categoryId}")
-    public ApiResponse getCategoryById(@PathVariable(name = "categoryId") Integer categoryId) {
-        return success("Category data fetched successuflly", categoryService.getCategoryById(categoryId));
+    @GetMapping("/{categoryid}")
+    public ApiResponse getCategoryById(@PathVariable(name = "categoryid") Integer categoryId) {
+        return success(get("data.get","Category"), categoryService.getCategoryById(categoryId));
     }
 
-    @GetMapping("getcategory")
-    public List<Category> getCategory() {
-        return categoryService.getCategory();
+    @GetMapping()
+    public ApiResponse getCategory() {
+        return  success(get("data.get","Category"),categoryService.getCategory());
     }
 
 }

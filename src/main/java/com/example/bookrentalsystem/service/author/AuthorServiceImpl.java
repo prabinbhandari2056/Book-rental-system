@@ -1,4 +1,4 @@
-package com.example.bookrentalsystem.service;
+package com.example.bookrentalsystem.service.author;
 
 import com.example.bookrentalsystem.mapper.AuthorDetailMapper;
 import com.example.bookrentalsystem.model.Author;
@@ -11,15 +11,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AuthorServiceImpl  implements  AuthorService{
+public class AuthorServiceImpl implements AuthorService {
 
-    private  final AuthorDetailRequestPojo authorDetailRequestPojo;
+    private final AuthorDetailRequestPojo authorDetailRequestPojo;
 
     private final ObjectMapper objectMapper;
 
     private final AuthorRepository authorRepository;
 
-    private  final AuthorDetailMapper authorDetailMapper;
+    private final AuthorDetailMapper authorDetailMapper;
 
     public AuthorServiceImpl(AuthorDetailRequestPojo authorDetailRequestPojo, ObjectMapper objectMapper, AuthorRepository authorRepository, AuthorDetailMapper authorDetailMapper) {
         this.authorDetailRequestPojo = authorDetailRequestPojo;
@@ -35,14 +35,15 @@ public class AuthorServiceImpl  implements  AuthorService{
 
     @Override
     public Object getAuthorById(Integer authorId) {
-        AuthorDetailResponsePojo authorDetailResponsePojo=authorDetailMapper.getAuthorById(authorId);
+        AuthorDetailResponsePojo authorDetailResponsePojo = authorDetailMapper.getAuthorById(authorId);
         return authorDetailResponsePojo;
     }
 
     @Override
     public void saveAuthorDetails(AuthorDetailRequestPojo authorDetailRequestPojo) {
-        Author author = null;
-        if (authorDetailRequestPojo.getAuthorId()!= null)
+
+        Author author;
+        if (authorDetailRequestPojo.getAuthorId() != null)
             author = authorRepository.findById(authorDetailRequestPojo.getAuthorId()).orElse(new Author());
         author = objectMapper.convertValue(authorDetailRequestPojo, Author.class);
         authorRepository.save(author);
