@@ -2,7 +2,7 @@ package com.example.bookrentalsystem.controller;
 
 import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.pojo.ApiResponse;
-import com.example.bookrentalsystem.pojo.BookTransactionDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.booktransaction.BookTransactionDetailRequestPojo;
 import com.example.bookrentalsystem.service.booktransaction.BookTransactionService;
 import org.springframework.web.bind.annotation.*;
 

@@ -3,7 +3,7 @@ package com.example.bookrentalsystem.service.booktransaction;
 
 import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.model.BookTransaction;
-import com.example.bookrentalsystem.pojo.BookTransactionDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.booktransaction.BookTransactionDetailRequestPojo;
 
 import java.util.List;
 

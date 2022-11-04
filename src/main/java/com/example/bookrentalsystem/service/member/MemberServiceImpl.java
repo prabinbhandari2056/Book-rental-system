@@ -2,7 +2,7 @@ package com.example.bookrentalsystem.service.member;
 
 import com.example.bookrentalsystem.mapper.MemberDetailMapper;
 import com.example.bookrentalsystem.model.Member;
-import com.example.bookrentalsystem.pojo.MemberDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.member.MemberDetailRequestPojo;
 import com.example.bookrentalsystem.repository.MemberRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;

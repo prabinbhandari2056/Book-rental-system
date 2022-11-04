@@ -1,13 +1,11 @@
 package com.example.bookrentalsystem.controller;
 
-import com.example.bookrentalsystem.model.Member;
 import com.example.bookrentalsystem.pojo.ApiResponse;
-import com.example.bookrentalsystem.pojo.MemberDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.member.MemberDetailRequestPojo;
 import com.example.bookrentalsystem.service.member.MemberService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("bookrent/member")

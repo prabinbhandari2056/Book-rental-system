@@ -5,7 +5,7 @@ import com.example.bookrentalsystem.mapper.BookDetailMapper;
 import com.example.bookrentalsystem.model.Author;
 import com.example.bookrentalsystem.model.Book;
 import com.example.bookrentalsystem.model.Category;
-import com.example.bookrentalsystem.pojo.BookDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.book.BookDetailRequestPojo;
 import com.example.bookrentalsystem.repository.AuthorRepository;
 import com.example.bookrentalsystem.repository.BookRepository;
 import com.example.bookrentalsystem.repository.CategoryRepository;
@@ -57,14 +57,17 @@ public class BookServiceImpl implements BookService {
 //            throw new AppException("Authors does not exist");
 //        book.setAuthor(authors);
 //        bookRepository.save(book);
+        Book book;
         String imagePath = GenericFileHandler.saveImage(bookDetailRequestPojo.getBookImage(), "/file/image/user/");
         Category category = categoryRepository.findById(bookDetailRequestPojo.getCategoryId()).orElseThrow(() -> new AppException("Category does not exist by category id"));
         List<Author> authors = authorRepository.findAllById(bookDetailRequestPojo.getAuthorId());
         if (authors.size() != bookDetailRequestPojo.getAuthorId().size())
             throw new AppException("Authors does not exist");
-        Book book=Book
-
+        if (bookDetailRequestPojo.getBookId()!= null)
+            book = bookRepository.findById(bookDetailRequestPojo.getBookId()).orElse(new Book());
+         book=Book
                 .builder()
+                 .bookId(bookDetailRequestPojo.getBookId())
                 .bookName(bookDetailRequestPojo.getBookName())
                 .noOfPages(bookDetailRequestPojo.getNoOfPages())
                 .isbn(bookDetailRequestPojo.getIsbn())
@@ -76,8 +79,6 @@ public class BookServiceImpl implements BookService {
                 .author(authors)
                 .build();
         bookRepository.save(book);
-
-
     }
 
 

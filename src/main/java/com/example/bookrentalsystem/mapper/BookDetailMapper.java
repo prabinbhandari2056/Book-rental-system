@@ -1,7 +1,6 @@
 package com.example.bookrentalsystem.mapper;
 
-import com.example.bookrentalsystem.pojo.BookDetailRequestPojo;
-import com.example.bookrentalsystem.pojo.BookTransactionDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.book.BookDetailRequestPojo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

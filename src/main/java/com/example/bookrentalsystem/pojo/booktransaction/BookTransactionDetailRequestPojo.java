@@ -1,4 +1,4 @@
-package com.example.bookrentalsystem.pojo;
+package com.example.bookrentalsystem.pojo.booktransaction;
 
 
 import com.example.bookrentalsystem.enums.RentType;
