@@ -1,8 +1,7 @@
-package com.example.bookrentalsystem.pojo;
+package com.example.bookrentalsystem.apiResponse;
 
 
 import lombok.*;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;

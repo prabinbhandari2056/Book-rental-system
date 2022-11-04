@@ -1,6 +1,6 @@
 package com.example.bookrentalsystem.controller;
 
-import com.example.bookrentalsystem.pojo.ApiResponse;
+import com.example.bookrentalsystem.apiResponse.ApiResponse;
 import com.example.bookrentalsystem.pojo.book.BookDetailRequestPojo;
 import com.example.bookrentalsystem.service.book.BookService;
 import org.springframework.web.bind.annotation.*;

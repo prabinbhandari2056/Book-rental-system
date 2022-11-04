@@ -1,6 +1,6 @@
 package com.example.bookrentalsystem.globalException;
 
-import com.example.bookrentalsystem.pojo.ApiResponse;
+import com.example.bookrentalsystem.apiResponse.ApiResponse;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;

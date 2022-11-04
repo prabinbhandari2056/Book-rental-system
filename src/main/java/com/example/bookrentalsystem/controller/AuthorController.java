@@ -1,5 +1,5 @@
 package com.example.bookrentalsystem.controller;
-import com.example.bookrentalsystem.pojo.ApiResponse;
+import com.example.bookrentalsystem.apiResponse.ApiResponse;
 import com.example.bookrentalsystem.pojo.author.AuthorDetailRequestPojo;
 import com.example.bookrentalsystem.service.author.AuthorService;
 import io.swagger.v3.oas.annotations.Operation;
