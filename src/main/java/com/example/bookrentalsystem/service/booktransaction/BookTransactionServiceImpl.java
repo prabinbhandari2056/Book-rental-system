@@ -1,7 +1,7 @@
 package com.example.bookrentalsystem.service.booktransaction;
 
 
-import com.example.bookrentalsystem.globalException.CustomExceptionHandler;
+import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.mapper.BookTransactionDetailMapper;
 import com.example.bookrentalsystem.model.Book;
 import com.example.bookrentalsystem.model.BookTransaction;
@@ -48,14 +48,14 @@ public class BookTransactionServiceImpl implements BookTransactionService {
     }
 
     @Override
-    public void saveBookTransactionDetails(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws CustomExceptionHandler {
+    public void saveBookTransactionDetails(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException {
         BookTransaction bookTransaction;
         if (bookTransactionDetailRequestPojo.getBookTransactionId() != null)
             bookTransaction = bookTransactionRepository.findById(bookTransactionDetailRequestPojo.getBookTransactionId()).orElse(new BookTransaction());
         bookTransaction = objectMapper.convertValue(bookTransactionDetailRequestPojo, BookTransaction.class);
-        Book book = bookRepository.findById(bookTransactionDetailRequestPojo.getBookId()).orElseThrow(() -> new CustomExceptionHandler("Book does not exist by category id"));
+        Book book = bookRepository.findById(bookTransactionDetailRequestPojo.getBookId()).orElseThrow(() -> new AppException("Book does not exist by category id"));
         bookTransaction.setBook(book);
-        Member member = memberRepository.findById(bookTransactionDetailRequestPojo.getMemberId()).orElseThrow(() -> new CustomExceptionHandler("Member does not exist by category id"));
+        Member member = memberRepository.findById(bookTransactionDetailRequestPojo.getMemberId()).orElseThrow(() -> new AppException("Member does not exist by category id"));
         bookTransaction.setMember(member);
         bookTransactionRepository.save(bookTransaction);
     }
@@ -68,16 +68,16 @@ public class BookTransactionServiceImpl implements BookTransactionService {
 
     @Transactional
     @Override
-    public void addNewTransaction(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws CustomExceptionHandler{
+    public void addNewTransaction(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException {
       if (bookTransactionDetailRequestPojo.getRentType().toString().equalsIgnoreCase("Rent")) {
           BookTransaction bookTransaction ;
           Member member = memberRepository.findById(bookTransactionDetailRequestPojo.getMemberId()).orElseThrow
-                  (() -> new CustomExceptionHandler("Member Does not exist by given member id."));
+                  (() -> new AppException("Member Does not exist by given member id."));
           Book book = bookRepository.findById(bookTransactionDetailRequestPojo.getBookId()).orElseThrow(() ->
-                  new CustomExceptionHandler("Book does not exist by given book id"));
+                  new AppException("Book does not exist by given book id"));
           Boolean rentStatus = bookTransactionDetailMapper.getRentStatus(bookTransactionDetailRequestPojo.getMemberId());
           if (rentStatus!=null && !rentStatus) {
-              throw new CustomExceptionHandler("Already rented");
+              throw new AppException("Already rented");
           }
 
               Integer bookCount = bookTransactionDetailMapper.getStockCount(bookTransactionDetailRequestPojo.getBookId());
@@ -90,7 +90,7 @@ public class BookTransactionServiceImpl implements BookTransactionService {
                   bookTransactionRepository.save(bookTransaction);
                   bookRepository.updateBookRent(bookTransactionDetailRequestPojo.getBookId());
               } else {
-                  throw new CustomExceptionHandler("Book not available in stock");
+                  throw new AppException("Book not available in stock");
               }
 
       }

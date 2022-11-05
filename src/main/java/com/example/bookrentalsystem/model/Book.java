@@ -1,9 +1,6 @@
 package com.example.bookrentalsystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,6 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Book {
     @Id
     @SequenceGenerator(sequenceName = "tbl_book_seq_gen", name = "tbl_book_seq", allocationSize = 1)
@@ -54,7 +52,7 @@ public class Book {
     @Column(name = "photo")
     @NotNull
     @Size(max = 200)
-    private String photo;
+    private String imagePath;
 
     @ManyToOne(targetEntity = Category.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id", foreignKey = @ForeignKey(name = "FK_book_category"))
@@ -66,5 +64,7 @@ public class Book {
     @ManyToMany(targetEntity = Author.class,cascade = CascadeType.ALL)
     @JoinColumn(name ="author_id",referencedColumnName = "author_id")
     private List<Author>  author;
+
+
 }
 

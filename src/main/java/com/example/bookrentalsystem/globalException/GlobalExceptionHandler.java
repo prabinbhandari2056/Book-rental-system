@@ -40,6 +40,5 @@ public class GlobalExceptionHandler {
     public ApiResponse handleAllException(Exception ex) {
         ApiResponse apiResponse = new ApiResponse();
         return apiResponse.error(ex.getMessage(), null);
-
     }
 }
