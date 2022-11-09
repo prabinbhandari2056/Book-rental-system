@@ -11,6 +11,8 @@ import javax.validation.Valid;
 /**
  * This controller returns book details and save book details.
  */
+@CrossOrigin(origins = "*")
+
 @RestController
 @RequestMapping("bookrental/book")
 public class BookController extends ApiResponse{

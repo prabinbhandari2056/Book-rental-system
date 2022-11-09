@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * This class is used to save and update author.
  */
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("bookrental/author")
 public class AuthorController extends ApiResponse {
