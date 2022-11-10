@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 /**
- * This controller returns book details and save book details.
+ * This controller returns book details and save book details using for data.
  */
 @RestController
 @RequestMapping("bookrental/book")
