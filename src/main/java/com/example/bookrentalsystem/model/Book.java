@@ -49,9 +49,8 @@ public class Book {
     @NotNull
     private LocalDate publishedDate;
 
-    @Column(name = "photo")
+    @Column(name = "photo",columnDefinition = "TEXT")
     @NotNull
-    @Size(max = 200)
     private String imagePath;
 
     @ManyToOne(targetEntity = Category.class,cascade = CascadeType.ALL)

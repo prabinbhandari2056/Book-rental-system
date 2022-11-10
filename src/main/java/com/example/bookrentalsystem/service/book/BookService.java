@@ -1,7 +1,7 @@
 package com.example.bookrentalsystem.service.book;
 
 import com.example.bookrentalsystem.model.Book;
-import com.example.bookrentalsystem.pojo.BookDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.book.BookDetailRequestPojo;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

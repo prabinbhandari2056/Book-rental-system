@@ -5,15 +5,17 @@ import com.example.bookrentalsystem.mapper.BookDetailMapper;
 import com.example.bookrentalsystem.model.Author;
 import com.example.bookrentalsystem.model.Book;
 import com.example.bookrentalsystem.model.Category;
-import com.example.bookrentalsystem.pojo.BookDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.book.BookDetailRequestPojo;
 import com.example.bookrentalsystem.repository.AuthorRepository;
 import com.example.bookrentalsystem.repository.BookRepository;
 import com.example.bookrentalsystem.repository.CategoryRepository;
-import com.example.bookrentalsystem.util.GenericFileHandler;
+import com.example.bookrentalsystem.util.FileExtensionValidatior;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -45,40 +47,36 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void saveBookDetails(BookDetailRequestPojo bookDetailRequestPojo) throws Exception {
-//        Book book = null;
-//        if (bookDetailRequestPojo.getBookId()!= null)
-//            book = bookRepository.findById(bookDetailRequestPojo.getBookId()).orElse(new Book());
-//        book = objectMapper.convertValue(bookDetailRequestPojo, Book.class);
-//
-//        Category category=categoryRepository.findById(bookDetailRequestPojo.getCategoryId()).orElseThrow(()->new AppException("Category does not exist by category id"));
-//        book.setCategory(category);
-//        List<Author> authors=authorRepository.findAllById(bookDetailRequestPojo.getAuthorId());
-//        if (authors.size()!=bookDetailRequestPojo.getAuthorId().size())
-//            throw new AppException("Authors does not exist");
-//        book.setAuthor(authors);
-//        bookRepository.save(book);
-        String imagePath = GenericFileHandler.saveImage(bookDetailRequestPojo.getBookImage(), "/file/image/user/");
+
+        Book book;
+        if (!(FileExtensionValidatior.validateFileExtension(bookDetailRequestPojo.getBookImage(), "jpeg", "jpg", "png"))) //Checks file extensions and size
+            throw new AppException("Please upload image file of type .png,.jpeg,.jpg  of size less than 250 KB.");
+        byte[] bytes = IOUtils.toByteArray(bookDetailRequestPojo.getBookImage().getInputStream()); //new code
+        String image = Base64.getEncoder().encodeToString(bytes);
         Category category = categoryRepository.findById(bookDetailRequestPojo.getCategoryId()).orElseThrow(() -> new AppException("Category does not exist by category id"));
         List<Author> authors = authorRepository.findAllById(bookDetailRequestPojo.getAuthorId());
         if (authors.size() != bookDetailRequestPojo.getAuthorId().size())
             throw new AppException("Authors does not exist");
-        Book book=Book
-
+        if (bookDetailRequestPojo.getBookId() != null)
+            book = bookRepository.findById(bookDetailRequestPojo.getBookId()).orElse(new Book());
+        book = Book
                 .builder()
+                .bookId(bookDetailRequestPojo.getBookId())
                 .bookName(bookDetailRequestPojo.getBookName())
                 .noOfPages(bookDetailRequestPojo.getNoOfPages())
                 .isbn(bookDetailRequestPojo.getIsbn())
                 .rating(bookDetailRequestPojo.getRating())
                 .stockCount(bookDetailRequestPojo.getStockCount())
                 .publishedDate(bookDetailRequestPojo.getPublishedDate())
-                .imagePath(imagePath)
+                .imagePath(image)
                 .category(category)
                 .author(authors)
                 .build();
         bookRepository.save(book);
-
-
     }
+
+
+//    }
 
 
     @Override

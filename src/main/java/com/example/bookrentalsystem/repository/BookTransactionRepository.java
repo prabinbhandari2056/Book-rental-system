@@ -1,17 +1,12 @@
 package com.example.bookrentalsystem.repository;
 
-import com.example.bookrentalsystem.model.Book;
 import com.example.bookrentalsystem.model.BookTransaction;
-import com.example.bookrentalsystem.model.Member;
-import com.example.bookrentalsystem.pojo.BookTransactionDetailRequestPojo;
-import org.apache.ibatis.annotations.Select;
+import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailRequestPojo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Optional;
 
 public interface BookTransactionRepository extends JpaRepository<BookTransaction,Integer> {
     BookTransactionDetailRequestPojo bookTransactiondetailRequestPojo = new BookTransactionDetailRequestPojo();

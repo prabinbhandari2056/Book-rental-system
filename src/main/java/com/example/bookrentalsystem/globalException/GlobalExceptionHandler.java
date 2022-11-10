@@ -1,6 +1,6 @@
 package com.example.bookrentalsystem.globalException;
 
-import com.example.bookrentalsystem.pojo.ApiResponse;
+import com.example.bookrentalsystem.pojo.api.ApiResponse;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,30 +15,25 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     public ApiResponse handleUniqueViolation(ConstraintViolationException ex) {
         if (ex.getConstraintName().contains("unique")) {
-            ApiResponse apiResponse = new ApiResponse();
             // unique_user_name
             String unique = ex.getConstraintName().replace("unique_", "");
-            return apiResponse.error(unique + " already exists", null);
+            return ApiResponse.builder().data(null).message(unique + " already exists").status(1).build();
         }
         return null;
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ApiResponse handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
-        ApiResponse apiResponse = new ApiResponse();
-        return apiResponse.error(ex.getCause().getCause().getLocalizedMessage(), null);
+        return ApiResponse.builder().data(null).message(ex.getCause().getCause().getLocalizedMessage()).status(1).build();
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ApiResponse handelMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        ApiResponse apiResponse = new ApiResponse();
-        return apiResponse.error(Objects.requireNonNull(ex.getFieldError()).getDefaultMessage(), null);
-
+        return ApiResponse.builder().data(null).message((Objects.requireNonNull(ex.getFieldError()).getDefaultMessage())).status(1).build();
     }
 
     @ExceptionHandler(Exception.class)
     public ApiResponse handleAllException(Exception ex) {
-        ApiResponse apiResponse = new ApiResponse();
-        return apiResponse.error(ex.getMessage(), null);
+        return ApiResponse.builder().data(null).message(ex.getMessage()).status(1).build();
     }
 }
