@@ -15,7 +15,6 @@ public class FileExtensionValidatior {
             if ((imageFile.getSize()/1024)>250)
                 return false;
         }
-
         return false;
     }
 

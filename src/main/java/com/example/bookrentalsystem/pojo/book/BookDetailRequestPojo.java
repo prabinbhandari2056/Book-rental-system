@@ -45,6 +45,5 @@ public class BookDetailRequestPojo {
     @NotNull
     private List<Integer> authorId;
 
-
     private MultipartFile bookImage;
 }

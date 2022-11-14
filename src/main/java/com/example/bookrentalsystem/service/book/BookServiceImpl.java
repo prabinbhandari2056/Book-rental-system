@@ -6,6 +6,7 @@ import com.example.bookrentalsystem.model.Author;
 import com.example.bookrentalsystem.model.Book;
 import com.example.bookrentalsystem.model.Category;
 import com.example.bookrentalsystem.pojo.book.BookDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.book.BookDetailResponsePojo;
 import com.example.bookrentalsystem.repository.AuthorRepository;
 import com.example.bookrentalsystem.repository.BookRepository;
 import com.example.bookrentalsystem.repository.CategoryRepository;
@@ -41,8 +42,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Object getBookById(Integer bookId) {
-        BookDetailRequestPojo bookDetailRequestPojo1 = bookDetailMapper.getBookById(bookId);
-        return bookDetailRequestPojo1;
+//        BookDetailResponsePojo bookDetailResponsePojo = bookDetailMapper.getBookById(bookId);
+        return bookRepository.findById(bookId);
     }
 
     @Override
@@ -74,9 +75,6 @@ public class BookServiceImpl implements BookService {
                 .build();
         bookRepository.save(book);
     }
-
-
-//    }
 
 
     @Override
