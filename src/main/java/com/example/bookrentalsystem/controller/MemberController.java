@@ -1,17 +1,17 @@
 package com.example.bookrentalsystem.controller;
 
-import com.example.bookrentalsystem.model.Member;
-import com.example.bookrentalsystem.pojo.ApiResponse;
-import com.example.bookrentalsystem.pojo.MemberDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.api.ApiResponse;
+import com.example.bookrentalsystem.pojo.api.BaseController;
+import com.example.bookrentalsystem.pojo.member.MemberDetailRequestPojo;
 import com.example.bookrentalsystem.service.member.MemberService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("bookrent/member")
-public class MemberController extends ApiResponse {
+public class MemberController extends BaseController {
     private final MemberService memberService;
 
     public MemberController(MemberService memberService) {

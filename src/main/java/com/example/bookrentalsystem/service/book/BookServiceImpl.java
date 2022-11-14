@@ -1,31 +1,36 @@
 package com.example.bookrentalsystem.service.book;
 
-import com.example.bookrentalsystem.globalException.CustomExceptionHandler;
+import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.mapper.BookDetailMapper;
 import com.example.bookrentalsystem.model.Author;
 import com.example.bookrentalsystem.model.Book;
 import com.example.bookrentalsystem.model.Category;
-import com.example.bookrentalsystem.pojo.BookDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.book.BookDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.book.BookDetailResponsePojo;
 import com.example.bookrentalsystem.repository.AuthorRepository;
 import com.example.bookrentalsystem.repository.BookRepository;
 import com.example.bookrentalsystem.repository.CategoryRepository;
+import com.example.bookrentalsystem.util.FileExtensionValidatior;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Base64;
 import java.util.List;
-@Service
-public class BookServiceImpl implements BookService{
 
-    private  final BookRepository bookRepository;
+@Service
+public class BookServiceImpl implements BookService {
+
+    private final BookRepository bookRepository;
 
     private final ObjectMapper objectMapper;
 
-    private  final BookDetailMapper bookDetailMapper;
+    private final BookDetailMapper bookDetailMapper;
 
     private final CategoryRepository categoryRepository;
 
-    private  final AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
     public BookServiceImpl(BookRepository bookRepository, ObjectMapper objectMapper, BookDetailMapper bookDetailMapper, CategoryRepository categoryRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
@@ -37,37 +42,51 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public Object getBookById(Integer bookId) {
-        BookDetailRequestPojo bookDetailRequestPojo1=bookDetailMapper.getBookById(bookId);
-        return bookDetailRequestPojo1;
+//        BookDetailResponsePojo bookDetailResponsePojo = bookDetailMapper.getBookById(bookId);
+        return bookRepository.findById(bookId);
     }
 
     @Override
-    public void saveBookDetails(BookDetailRequestPojo bookDetailRequestPojo) throws CustomExceptionHandler {
-        Book book = null;
-        if (bookDetailRequestPojo.getBookId()!= null)
+    public void saveBookDetails(BookDetailRequestPojo bookDetailRequestPojo) throws Exception {
+
+        Book book;
+        if (!(FileExtensionValidatior.validateFileExtension(bookDetailRequestPojo.getBookImage(), "jpeg", "jpg", "png"))) //Checks file extensions and size
+            throw new AppException("Please upload image file of type .png,.jpeg,.jpg  of size less than 250 KB.");
+        byte[] bytes = IOUtils.toByteArray(bookDetailRequestPojo.getBookImage().getInputStream()); //new code
+        String image = Base64.getEncoder().encodeToString(bytes);
+        Category category = categoryRepository.findById(bookDetailRequestPojo.getCategoryId()).orElseThrow(() -> new AppException("Category does not exist by category id"));
+        List<Author> authors = authorRepository.findAllById(bookDetailRequestPojo.getAuthorId());
+        if (authors.size() != bookDetailRequestPojo.getAuthorId().size())
+            throw new AppException("Authors does not exist");
+        if (bookDetailRequestPojo.getBookId() != null)
             book = bookRepository.findById(bookDetailRequestPojo.getBookId()).orElse(new Book());
-        book = objectMapper.convertValue(bookDetailRequestPojo, Book.class);
-
-        Category category=categoryRepository.findById(bookDetailRequestPojo.getCategoryId()).orElseThrow(()->new CustomExceptionHandler("Category does not exist by category id"));
-        book.setCategory(category);
-        List<Author> authors=authorRepository.findAllById(bookDetailRequestPojo.getAuthorId());
-        if (authors.size()!=bookDetailRequestPojo.getAuthorId().size())
-            throw new CustomExceptionHandler("Authors does not exist");
-        book.setAuthor(authors);
+        book = Book
+                .builder()
+                .bookId(bookDetailRequestPojo.getBookId())
+                .bookName(bookDetailRequestPojo.getBookName())
+                .noOfPages(bookDetailRequestPojo.getNoOfPages())
+                .isbn(bookDetailRequestPojo.getIsbn())
+                .rating(bookDetailRequestPojo.getRating())
+                .stockCount(bookDetailRequestPojo.getStockCount())
+                .publishedDate(bookDetailRequestPojo.getPublishedDate())
+                .imagePath(image)
+                .category(category)
+                .author(authors)
+                .build();
         bookRepository.save(book);
-}
-
+    }
 
 
     @Override
     public List<Book> getBook() {
-                return bookRepository.findAll();
+        return bookRepository.findAll();
     }
+
     @Transactional
     @Override
     public void updateBookStock(BookDetailRequestPojo bookDetailRequestPojo) {
-        Category category=categoryRepository.findById(bookDetailRequestPojo.getCategoryId()).orElseThrow(()->new RuntimeException("Category does not exist by category id"));
-        List<Author> authors=authorRepository.findAllById(bookDetailRequestPojo.getAuthorId());
-        bookRepository.updateBookStock(bookDetailRequestPojo.getBookId(),bookDetailRequestPojo.getStockCount());
+        Category category = categoryRepository.findById(bookDetailRequestPojo.getCategoryId()).orElseThrow(() -> new RuntimeException("Category does not exist by category id"));
+        List<Author> authors = authorRepository.findAllById(bookDetailRequestPojo.getAuthorId());
+        bookRepository.updateBookStock(bookDetailRequestPojo.getBookId(), bookDetailRequestPojo.getStockCount());
     }
 }

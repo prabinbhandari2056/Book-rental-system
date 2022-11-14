@@ -1,9 +1,7 @@
 package com.example.bookrentalsystem.service.book;
 
-import com.example.bookrentalsystem.globalException.CustomExceptionHandler;
 import com.example.bookrentalsystem.model.Book;
-import com.example.bookrentalsystem.pojo.BookDetailRequestPojo;
-import org.springframework.stereotype.Service;
+import com.example.bookrentalsystem.pojo.book.BookDetailRequestPojo;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -12,7 +10,7 @@ import java.util.List;
 
 public interface BookService {
     Object getBookById(Integer bookId);
-    void saveBookDetails(BookDetailRequestPojo bookDetailRequestPojo) throws CustomExceptionHandler;
+    void saveBookDetails(BookDetailRequestPojo bookDetailRequestPojo) throws Exception;
     public List<Book> getBook();
 
     @Transactional

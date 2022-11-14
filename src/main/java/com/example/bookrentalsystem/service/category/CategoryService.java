@@ -1,8 +1,7 @@
 package com.example.bookrentalsystem.service.category;
 
 import com.example.bookrentalsystem.model.Category;
-import com.example.bookrentalsystem.pojo.CategoryDetailRequestPojo;
-import org.springframework.stereotype.Service;
+import com.example.bookrentalsystem.pojo.category.CategoryDetailRequestPojo;
 
 import java.util.List;
 

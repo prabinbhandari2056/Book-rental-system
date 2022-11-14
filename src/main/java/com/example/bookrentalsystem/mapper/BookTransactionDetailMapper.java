@@ -1,8 +1,8 @@
 package com.example.bookrentalsystem.mapper;
 
-import com.example.bookrentalsystem.pojo.BookDetailResponsePojo;
-import com.example.bookrentalsystem.pojo.BookTransactionDetailResponsePojo;
-import com.example.bookrentalsystem.pojo.MemberDetailResponsePojo;
+import com.example.bookrentalsystem.pojo.book.BookDetailResponsePojo;
+import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailResponsePojo;
+import com.example.bookrentalsystem.pojo.member.MemberDetailResponsePojo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

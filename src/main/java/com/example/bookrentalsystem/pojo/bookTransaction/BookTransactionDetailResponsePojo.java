@@ -1,17 +1,13 @@
-package com.example.bookrentalsystem.pojo;
+package com.example.bookrentalsystem.pojo.bookTransaction;
 
 
 import com.example.bookrentalsystem.enums.RentType;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
-
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -19,24 +15,23 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Service
-public class BookTransactionDetailRequestPojo {
+public class BookTransactionDetailResponsePojo {
 
 
     private Integer bookTransactionId;
 
-    @NotNull
     private Integer bookId;
 
     private String code;
 
-    private LocalDate fromDate;
+    private Date fromDate;
 
-    private LocalDate toDate;
+    private Date toDate;
 
 
     private RentType rentType;
 
-    @NotNull
+
     private Integer memberId;
 
     private String status;

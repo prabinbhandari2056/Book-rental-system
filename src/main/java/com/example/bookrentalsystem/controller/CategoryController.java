@@ -1,17 +1,18 @@
 package com.example.bookrentalsystem.controller;
 
-import com.example.bookrentalsystem.model.Category;
-import com.example.bookrentalsystem.pojo.ApiResponse;
-import com.example.bookrentalsystem.pojo.CategoryDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.api.ApiResponse;
+import com.example.bookrentalsystem.pojo.api.BaseController;
+import com.example.bookrentalsystem.pojo.category.CategoryDetailRequestPojo;
 import com.example.bookrentalsystem.service.category.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
+
+@CrossOrigin(origins = "*")
 
 @RestController
 @RequestMapping("bookrental/category")
-public class CategoryController extends ApiResponse{
+public class CategoryController extends BaseController {
 
     private final CategoryService categoryService;
 

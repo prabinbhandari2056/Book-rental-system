@@ -1,24 +1,26 @@
 package com.example.bookrentalsystem.controller;
-import com.example.bookrentalsystem.model.Author;
-import com.example.bookrentalsystem.pojo.ApiResponse;
-import com.example.bookrentalsystem.pojo.AuthorDetailRequestPojo;
+
+import com.example.bookrentalsystem.pojo.api.ApiResponse;
+import com.example.bookrentalsystem.pojo.api.BaseController;
+import com.example.bookrentalsystem.pojo.author.AuthorDetailRequestPojo;
 import com.example.bookrentalsystem.service.author.AuthorService;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * This class is used to save and update author.
  */
+@CrossOrigin(origins = "*")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("bookrental/author")
-public class AuthorController extends ApiResponse {
+public class AuthorController extends BaseController {
     private final AuthorService authorService;
 
-    public AuthorController(AuthorService authorService) {
-        this.authorService = authorService;
-    }
+
 
     /**
      * It returns all data from databases.

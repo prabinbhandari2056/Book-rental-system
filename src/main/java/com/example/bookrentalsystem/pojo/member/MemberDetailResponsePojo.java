@@ -1,4 +1,4 @@
-package com.example.bookrentalsystem.pojo;
+package com.example.bookrentalsystem.pojo.member;
 
 
 import lombok.AllArgsConstructor;
@@ -8,18 +8,16 @@ import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Service
-public class MemberDetailRequestPojo {
+public class MemberDetailResponsePojo {
+
     private  Integer memberId;
 
     private  String email;
-
-    private String name;
 
     private String mobileNo;
 

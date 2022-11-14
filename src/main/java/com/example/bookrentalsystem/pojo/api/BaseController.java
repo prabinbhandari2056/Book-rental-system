@@ -1,22 +1,11 @@
-package com.example.bookrentalsystem.pojo;
+package com.example.bookrentalsystem.pojo.api;
 
-
-import lombok.*;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-
-@Service
-public class ApiResponse {
+public class BaseController {
     private Integer status;
 
     private String message;
@@ -25,6 +14,8 @@ public class ApiResponse {
 
     @Autowired
     private MessageSource messageSource;
+
+
 
     public ApiResponse success(String message, Object data) {
         ApiResponse response=ApiResponse.builder()
