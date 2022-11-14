@@ -45,8 +45,7 @@ public class BookTransactionServiceImpl implements BookTransactionService {
 
     @Override
     public Object getBookTransactionById(Integer bookTransactionId) {
-        BookTransactionDetailResponsePojo bookTransactionDetailResponsePojo = bookTransactionDetailMapper.getBookTransactionById(bookTransactionId);
-        return bookTransactionDetailResponsePojo;
+        return bookTransactionRepository.findById(bookTransactionId);
     }
 
     @Override
