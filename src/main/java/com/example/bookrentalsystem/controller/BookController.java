@@ -1,21 +1,21 @@
 package com.example.bookrentalsystem.controller;
 
-import com.example.bookrentalsystem.globalException.AppException;
-import com.example.bookrentalsystem.pojo.ApiResponse;
-import com.example.bookrentalsystem.pojo.BookDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.api.ApiResponse;
+import com.example.bookrentalsystem.pojo.api.BaseController;
+import com.example.bookrentalsystem.pojo.book.BookDetailRequestPojo;
 import com.example.bookrentalsystem.service.book.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 /**
- * This controller returns book details and save book details.
+ * This controller returns book details and save book details using for data.
  */
 @CrossOrigin(origins = "*")
 
 @RestController
 @RequestMapping("bookrental/book")
-public class BookController extends ApiResponse{
+public class BookController extends BaseController {
     private final BookService bookService;
 
     public BookController(BookService bookService) {
