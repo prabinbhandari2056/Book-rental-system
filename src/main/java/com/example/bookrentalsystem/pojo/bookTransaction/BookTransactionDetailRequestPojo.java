@@ -27,7 +27,7 @@ public class BookTransactionDetailRequestPojo {
     @NotNull
     private Integer bookId;
 
-    private String code;
+//    private String code;
 
     private LocalDate fromDate;
 
@@ -39,6 +39,6 @@ public class BookTransactionDetailRequestPojo {
     @NotNull
     private Integer memberId;
 
-    private String status;
+//    private String status;
 }
 

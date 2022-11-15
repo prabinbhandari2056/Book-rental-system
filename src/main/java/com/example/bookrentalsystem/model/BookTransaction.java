@@ -44,7 +44,6 @@ public class BookTransaction {
     @JoinColumn( name = "member_id", referencedColumnName = "member_id", foreignKey = @ForeignKey(name = "FK_book_member"))
     private Member member;
 
-    @Column(name = "active")
-    private String status;
+
 
 }
