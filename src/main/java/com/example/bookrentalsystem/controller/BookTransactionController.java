@@ -24,11 +24,6 @@ public class BookTransactionController extends BaseController {
         return success(get("data.get","Book Transaction"), bookTransactionService.getBookTransaction());
     }
 
-    @PostMapping()
-    public ApiResponse saveBookTransactionDetails(@RequestBody @Valid BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException {
-        bookTransactionService.saveBookTransactionDetails(bookTransactionDetailRequestPojo);
-        return success(get("data.save","Book Transaction"), null);
-    }
 
     @PostMapping("rent-book")
     public ApiResponse rentBookTransaction(@RequestBody @Valid BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException {
