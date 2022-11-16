@@ -22,9 +22,11 @@ public class AuthorDetailRequestPojo {
     @NotNull
     private  String authorName;
 
+    @NotNull
     @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}",message = "Enter valid email address.")
     private String authorEmail;
 
+    @NotNull
     @Pattern(regexp = "^[0-9]{8,10}",message = "Enter valid phone numbers")
     private String authorMobile;
 }
