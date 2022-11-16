@@ -18,7 +18,7 @@ import javax.validation.constraints.Pattern;
 public class MemberDetailRequestPojo {
     private  Integer memberId;
 
-    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4} ",message = "Enter valid email address.")
+    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}",message = "Enter valid email address.")
     private  String email;
 
     private String name;
