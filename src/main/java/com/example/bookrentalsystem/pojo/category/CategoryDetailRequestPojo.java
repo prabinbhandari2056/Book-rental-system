@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,8 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoryDetailRequestPojo {
     private  Integer categoryId;
-
+    @NotNull
     private  String categoryName;
-
+    @NotNull
     private  String categoryDescription;
 }
