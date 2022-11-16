@@ -20,20 +20,21 @@ import java.util.List;
 public class BookDetailRequestPojo {
     private Integer bookId;
 
+    @NotNull
     private String bookName;
 
-
+    @NotNull
     private Integer noOfPages;
 
-
+    @NotNull
     private String isbn;
 
-
+    @NotNull
     private Double rating;
 
-
+    @NotNull
     private Integer stockCount;
-
+    @NotNull
     private LocalDate publishedDate;
 
 
@@ -44,6 +45,6 @@ public class BookDetailRequestPojo {
 
     @NotNull
     private List<Integer> authorId;
-
+    @NotNull
     private MultipartFile bookImage;
 }

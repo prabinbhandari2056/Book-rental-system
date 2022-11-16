@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface BookTransactionService {
     Object getBookTransactionById(Integer bookTransactionId);
-    void saveBookTransactionDetails(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException;
     public List<BookTransaction> getBookTransaction();
 
     void addNewTransaction(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException;

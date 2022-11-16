@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public Object getCategoryById(Integer categoryId) {
-        return categoryDetailMapper.findCategoryById(categoryId);
+        return categoryRepository.findById(categoryId);
     }
 
     @Override

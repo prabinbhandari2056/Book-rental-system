@@ -8,10 +8,10 @@ import com.example.bookrentalsystem.model.BookTransaction;
 import com.example.bookrentalsystem.model.Member;
 import com.example.bookrentalsystem.pojo.api.ApiResponse;
 import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailRequestPojo;
-import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailResponsePojo;
 import com.example.bookrentalsystem.repository.BookRepository;
 import com.example.bookrentalsystem.repository.BookTransactionRepository;
 import com.example.bookrentalsystem.repository.MemberRepository;
+import com.example.bookrentalsystem.util.BookCodeGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
@@ -41,26 +41,14 @@ public class BookTransactionServiceImpl implements BookTransactionService {
         this.bookTransactionRepository = bookTransactionRepository;
         this.bookTransactionDetailMapper = bookTransactionDetailMapper;
         this.objectMapper = objectMapper;
+
     }
 
     @Override
     public Object getBookTransactionById(Integer bookTransactionId) {
-        BookTransactionDetailResponsePojo bookTransactionDetailResponsePojo = bookTransactionDetailMapper.getBookTransactionById(bookTransactionId);
-        return bookTransactionDetailResponsePojo;
+        return bookTransactionRepository.findById(bookTransactionId);
     }
 
-    @Override
-    public void saveBookTransactionDetails(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException {
-        BookTransaction bookTransaction;
-        if (bookTransactionDetailRequestPojo.getBookTransactionId() != null)
-            bookTransaction = bookTransactionRepository.findById(bookTransactionDetailRequestPojo.getBookTransactionId()).orElse(new BookTransaction());
-        bookTransaction = objectMapper.convertValue(bookTransactionDetailRequestPojo, BookTransaction.class);
-        Book book = bookRepository.findById(bookTransactionDetailRequestPojo.getBookId()).orElseThrow(() -> new AppException("Book does not exist by category id"));
-        bookTransaction.setBook(book);
-        Member member = memberRepository.findById(bookTransactionDetailRequestPojo.getMemberId()).orElseThrow(() -> new AppException("Member does not exist by category id"));
-        bookTransaction.setMember(member);
-        bookTransactionRepository.save(bookTransaction);
-    }
 
     @Override
     public List<BookTransaction> getBookTransaction() {
@@ -89,6 +77,9 @@ public class BookTransactionServiceImpl implements BookTransactionService {
                   bookTransaction = objectMapper.convertValue(bookTransactionDetailRequestPojo, BookTransaction.class);
                   bookTransaction.setBook(book);
                   bookTransaction.setMember(member);
+                  BookCodeGenerator bookCodeGenerator=new BookCodeGenerator();
+                  String bookCode=bookCodeGenerator.getRandomString();
+                  bookTransaction.setCode(bookCode);
                   bookTransactionRepository.save(bookTransaction);
                   bookRepository.updateBookRent(bookTransactionDetailRequestPojo.getBookId());
               } else {

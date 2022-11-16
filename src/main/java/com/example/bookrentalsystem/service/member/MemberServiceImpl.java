@@ -30,12 +30,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Object getMemberById(Integer memberId) {
-        return  memberDetailMapper.findMemberById(memberId);
+        return  memberRepository.findById(memberId);
     }
 
     @Override
     public void saveMemberDetails(MemberDetailRequestPojo memberDetailRequestPojo) {
-        Member member = null;
+        Member member;
         if (memberDetailRequestPojo.getMemberId()!= null)
             member = memberRepository.findById(memberDetailRequestPojo.getMemberId()).orElse(new Member());
         member = objectMapper.convertValue(memberDetailRequestPojo, Member.class);
