@@ -24,21 +24,18 @@ public class BookTransactionDetailRequestPojo {
 
     private Integer bookTransactionId;
 
-    @NotNull
+
     private Integer bookId;
 
-//    private String code;
 
-    private LocalDate fromDate;
 
     private LocalDate toDate;
 
 
     private RentType rentType;
 
-    @NotNull
+
     private Integer memberId;
 
-//    private String status;
 }
 

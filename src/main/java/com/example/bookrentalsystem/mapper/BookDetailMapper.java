@@ -13,5 +13,11 @@ public interface BookDetailMapper {
     @Select("select stock from tbl_book where \"book_id\"=#{bookId}")
     Integer getStockById(Integer bookId);
 
+    @Select("select book_name from tbl_book where \"book_id\"=#{bookId}")
+    String getBookName(Integer bookId);
+
+
+    @Select("select stock_count from tbl_book where \"book_id\"=#{bookId}")
+    Integer getBookCount(Integer bookId);
 
 }

@@ -1,7 +1,9 @@
 package com.example.bookrentalsystem.service.booktransaction;
 
 
+import com.example.bookrentalsystem.enums.RentType;
 import com.example.bookrentalsystem.globalException.AppException;
+import com.example.bookrentalsystem.mapper.BookDetailMapper;
 import com.example.bookrentalsystem.mapper.BookTransactionDetailMapper;
 import com.example.bookrentalsystem.model.Book;
 import com.example.bookrentalsystem.model.BookTransaction;
@@ -29,19 +31,21 @@ public class BookTransactionServiceImpl implements BookTransactionService {
 
 
     private final BookTransactionDetailMapper bookTransactionDetailMapper;
+    private final BookDetailMapper bookDetailMapper;
 
     private final ObjectMapper objectMapper;
 
 
     public BookTransactionServiceImpl(BookRepository bookRepository, MemberRepository memberRepository, BookTransactionRepository bookTransactionRepository,
                                       BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo,
-                                      BookTransactionDetailMapper bookTransactionDetailMapper, ObjectMapper objectMapper, ApiResponse apiResponse) {
+                                      BookTransactionDetailMapper bookTransactionDetailMapper, ObjectMapper objectMapper, ApiResponse apiResponse, BookDetailMapper bookDetailMapper) {
         this.bookRepository = bookRepository;
         this.memberRepository = memberRepository;
         this.bookTransactionRepository = bookTransactionRepository;
         this.bookTransactionDetailMapper = bookTransactionDetailMapper;
         this.objectMapper = objectMapper;
 
+        this.bookDetailMapper = bookDetailMapper;
     }
 
     @Override
@@ -59,7 +63,16 @@ public class BookTransactionServiceImpl implements BookTransactionService {
     @Transactional
     @Override
     public void addNewTransaction(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException {
-      if (bookTransactionDetailRequestPojo.getRentType().toString().equalsIgnoreCase("Rent")) {
+      if (bookTransactionDetailRequestPojo.getRentType().toString().equalsIgnoreCase("RENT")) {
+          if (bookTransactionDetailRequestPojo.getBookId()==null){
+              throw new AppException("Book Id can not be null");
+          }
+         else if (bookTransactionDetailRequestPojo.getMemberId()==null){
+              throw new AppException("Member Id can not be null");
+          }
+          else if (bookTransactionDetailRequestPojo.getToDate()==null){
+              throw new AppException("Rent till date  can not be null");
+          }
           BookTransaction bookTransaction ;
           Member member = memberRepository.findById(bookTransactionDetailRequestPojo.getMemberId()).orElseThrow
                   (() -> new AppException("Member Does not exist by given member id."));
@@ -69,7 +82,6 @@ public class BookTransactionServiceImpl implements BookTransactionService {
           if (rentStatus!=null && !rentStatus) {
               throw new AppException("Already rented");
           }
-
               Integer bookCount = bookTransactionDetailMapper.getStockCount(bookTransactionDetailRequestPojo.getBookId());
               if (bookCount >= 1) {
                   if (bookTransactionDetailRequestPojo.getBookTransactionId() != null)
@@ -77,9 +89,10 @@ public class BookTransactionServiceImpl implements BookTransactionService {
                   bookTransaction = objectMapper.convertValue(bookTransactionDetailRequestPojo, BookTransaction.class);
                   bookTransaction.setBook(book);
                   bookTransaction.setMember(member);
-                  BookCodeGenerator bookCodeGenerator=new BookCodeGenerator();
+                  BookCodeGenerator bookCodeGenerator=new BookCodeGenerator(bookDetailMapper,bookTransactionDetailRequestPojo);
                   String bookCode=bookCodeGenerator.getRandomString();
                   bookTransaction.setCode(bookCode);
+                  bookTransaction.setFromDate(java.time.LocalDate.now());
                   bookTransactionRepository.save(bookTransaction);
                   bookRepository.updateBookRent(bookTransactionDetailRequestPojo.getBookId());
               } else {
@@ -88,7 +101,7 @@ public class BookTransactionServiceImpl implements BookTransactionService {
 
       }
        else if (bookTransactionDetailRequestPojo.getRentType().toString().equalsIgnoreCase("RETURN")) {
-          bookTransactionRepository.updateBookReturnTransaction(bookTransactionDetailRequestPojo.getBookId(),bookTransactionDetailRequestPojo.getMemberId());
+           bookTransactionRepository.updateBookReturnTransaction(bookTransactionDetailRequestPojo.getBookId(),bookTransactionDetailRequestPojo.getMemberId());
           bookRepository.updateBookReturn(bookTransactionDetailRequestPojo.getBookId());
       }
     }
