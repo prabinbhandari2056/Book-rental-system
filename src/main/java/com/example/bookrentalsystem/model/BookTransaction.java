@@ -43,7 +43,4 @@ public class BookTransaction {
     @ManyToOne
     @JoinColumn( name = "member_id", referencedColumnName = "member_id", foreignKey = @ForeignKey(name = "FK_book_member"))
     private Member member;
-
-
-
 }
