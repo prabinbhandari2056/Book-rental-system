@@ -30,7 +30,10 @@ public class BookTransactionController extends BaseController {
     @PostMapping("rent-book")
     public ApiResponse rentBookTransaction(@RequestBody @Valid BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException {
         bookTransactionService.addNewTransaction(bookTransactionDetailRequestPojo);
-        return success(get("book.rent"), null);
+        if (bookTransactionDetailRequestPojo.getRentType().toString().equalsIgnoreCase("RENT"))
+         return success(get("book.rent"), null);
+        else
+            return  success(get("book.return"),null);
     }
     @PostMapping("return-book")
     public ApiResponse returnABookTransaction(@RequestBody @Valid BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo){
