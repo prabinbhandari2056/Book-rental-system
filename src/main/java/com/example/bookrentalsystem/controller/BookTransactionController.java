@@ -27,7 +27,7 @@ public class BookTransactionController extends BaseController {
     }
 
 
-    @PostMapping("rent-book")
+    @PostMapping("add-book-transaction")
     public ApiResponse rentBookTransaction(@RequestBody @Valid BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException {
         bookTransactionService.addNewTransaction(bookTransactionDetailRequestPojo);
         if (bookTransactionDetailRequestPojo.getRentType().toString().equalsIgnoreCase("RENT"))
@@ -35,11 +35,11 @@ public class BookTransactionController extends BaseController {
         else
             return  success(get("book.return"),null);
     }
-    @PostMapping("return-book")
-    public ApiResponse returnABookTransaction(@RequestBody @Valid BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo){
-        bookTransactionService.addReturnTransaction(bookTransactionDetailRequestPojo);
-        return success(get("book.return"),null);
-    }
+//    @PostMapping("return-book")
+//    public ApiResponse returnABookTransaction(@RequestBody @Valid BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo){
+//        bookTransactionService.addReturnTransaction(bookTransactionDetailRequestPojo);
+//        return success(get("book.return"),null);
+//    }
 
     @GetMapping("/{memberid}")
     public ApiResponse getBookTransactionByMemberId(@PathVariable(name = "memberid") Integer memberId) {
