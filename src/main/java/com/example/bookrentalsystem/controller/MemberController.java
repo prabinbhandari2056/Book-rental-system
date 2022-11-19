@@ -1,5 +1,6 @@
 package com.example.bookrentalsystem.controller;
 
+import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.pojo.api.ApiResponse;
 import com.example.bookrentalsystem.pojo.api.BaseController;
 import com.example.bookrentalsystem.pojo.member.MemberDetailRequestPojo;
@@ -28,6 +29,12 @@ public class MemberController extends BaseController {
     public ApiResponse saveMemberDetails(@RequestBody @Valid MemberDetailRequestPojo memberDetailRequestPojo){
         memberService.saveMemberDetails(memberDetailRequestPojo);
         return success(get("data.save","Member"), null);
+    }
+
+    @DeleteMapping("/{memberid}")
+    public ApiResponse deleteMemberById(@PathVariable(name = "memberid")Integer memberId) throws AppException {
+        memberService.deleteMemberById(memberId);
+        return success(get("data.delete"," Member"),null);
     }
 
     @GetMapping("/{memberid}")

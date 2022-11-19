@@ -1,5 +1,6 @@
 package com.example.bookrentalsystem.service.member;
 
+import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.mapper.MemberDetailMapper;
 import com.example.bookrentalsystem.model.Member;
 import com.example.bookrentalsystem.pojo.member.MemberDetailRequestPojo;
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -46,5 +48,16 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<Member> getMember() {
         return memberRepository.findAll();
+    }
+
+    @Override
+    public void deleteMemberById(Integer memberId) throws AppException {
+        Optional<Member> exists=memberRepository.findById(memberId);
+        if (!exists.isPresent()){
+            throw new AppException("Member does not exist by given"+ memberId +" Member id");
+        }
+        else if (exists.isPresent()){
+            memberRepository.deleteById(memberId);
+        }
     }
 }

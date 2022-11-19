@@ -1,5 +1,6 @@
 package com.example.bookrentalsystem.service.author;
 
+import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.mapper.AuthorDetailMapper;
 import com.example.bookrentalsystem.model.Author;
 import com.example.bookrentalsystem.pojo.author.AuthorDetailRequestPojo;
@@ -8,7 +9,9 @@ import com.example.bookrentalsystem.repository.AuthorRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -31,6 +34,17 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public List<Author> getAuthor() {
         return authorRepository.findAll();
+    }
+
+    @Override
+    public void deleteAuthorById(Integer authorId) throws AppException {
+        Optional<Author> exists=authorRepository.findById(authorId);
+        if (!exists.isPresent()){
+            throw new AppException(("Author with given author id" + authorId+" doesnot exist"));
+        }
+        else if (exists.isPresent()){
+            authorRepository.deleteById(authorId);
+        }
     }
 
     @Override

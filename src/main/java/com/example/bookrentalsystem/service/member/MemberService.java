@@ -1,5 +1,6 @@
 package com.example.bookrentalsystem.service.member;
 
+import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.model.Member;
 import com.example.bookrentalsystem.pojo.member.MemberDetailRequestPojo;
 
@@ -9,4 +10,5 @@ public interface MemberService {
     Object getMemberById(Integer memberId);
     void saveMemberDetails(MemberDetailRequestPojo memberDetailRequestPojo);
     public List<Member> getMember();
+    void deleteMemberById(Integer memberId) throws AppException;
 }

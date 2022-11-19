@@ -1,10 +1,9 @@
 package com.example.bookrentalsystem.controller;
 
+import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.pojo.api.ApiResponse;
 import com.example.bookrentalsystem.pojo.api.BaseController;
-import com.example.bookrentalsystem.pojo.member.MemberDetailRequestPojo;
 import com.example.bookrentalsystem.pojo.user.UserDetailRequestPojo;
-import com.example.bookrentalsystem.service.member.MemberService;
 import com.example.bookrentalsystem.service.user.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +34,11 @@ public class UserController extends BaseController {
     @GetMapping("/{userid}")
     public ApiResponse getUserById(@PathVariable(name = "userid") Integer userId) {
         return success(get("data.get","User"), userService.getUserByUserId(userId));
+    }
+
+    @DeleteMapping("/{userid}")
+    public ApiResponse deleteUserById(@PathVariable(name = "useri")Integer userId) throws AppException {
+        userService.deleteUserById(userId);
+        return success(get("data.delete"," User"),null);
     }
 }

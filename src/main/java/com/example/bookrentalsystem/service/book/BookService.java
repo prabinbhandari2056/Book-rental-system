@@ -1,5 +1,6 @@
 package com.example.bookrentalsystem.service.book;
 
+import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.model.Book;
 import com.example.bookrentalsystem.pojo.book.BookDetailRequestPojo;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,4 +16,6 @@ public interface BookService {
 
     @Transactional
     void updateBookStock(BookDetailRequestPojo bookDetailRequestPojo);
+
+    void deleteBookById(Integer bookId) throws AppException;
 }
