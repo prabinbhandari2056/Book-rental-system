@@ -1,4 +1,4 @@
-package com.example.bookrentalsystem.controller;
+package com.example.bookrentalsystem.security;
 
 
 import com.example.bookrentalsystem.model.authentication.AuthenticationRequest;
@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("bookrental/authenticate")
 class AuthenticationController {
