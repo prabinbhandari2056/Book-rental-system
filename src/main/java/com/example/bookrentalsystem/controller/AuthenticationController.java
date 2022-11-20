@@ -1,4 +1,4 @@
-package com.example.bookrentalsystem.security;
+package com.example.bookrentalsystem.controller;
 
 
 import com.example.bookrentalsystem.model.authentication.AuthenticationRequest;
@@ -14,18 +14,23 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("bookrental/authenticate")
 class AuthenticationController {
+
+
     @Autowired
     private AuthenticationProvider authenticationManager;
+
     @Autowired
     private JwtUtil jwtTokenUtil;
+
     @Autowired
     private CustomUserDetailsService userDetailsService;
-    @PostMapping("")
+
+
+    @PostMapping
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
         try {
