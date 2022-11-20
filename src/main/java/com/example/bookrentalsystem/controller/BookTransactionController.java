@@ -12,7 +12,7 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*")
 
 @RestController
-@RequestMapping("bookrent/booktransaction")
+@RequestMapping("bookrental/booktransaction")
 public class BookTransactionController extends BaseController {
     private final BookTransactionService bookTransactionService;
 

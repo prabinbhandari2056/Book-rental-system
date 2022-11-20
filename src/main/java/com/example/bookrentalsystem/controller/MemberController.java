@@ -11,7 +11,7 @@ import javax.validation.Valid;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("bookrent/member")
+@RequestMapping("bookrental/member")
 public class MemberController extends BaseController {
     private final MemberService memberService;
 
