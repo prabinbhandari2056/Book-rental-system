@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "user_name", name = "UNIQUE_user_user_name")})
@@ -23,10 +22,8 @@ public class User {
     private Integer user_id;
 
     @Column(name = "user_name")
-    @NotNull
     private String userName;
 
-    @NotNull
     @Column(name = "password")
     private String password;
 
