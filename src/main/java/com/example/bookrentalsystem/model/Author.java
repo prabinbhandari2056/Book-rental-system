@@ -23,9 +23,12 @@ public class Author {
     @Column(name = "author_id")
     private Integer authorId;
     @Column(name = "author_name")
+
     private  String authorName;
     @Column(name = "author_email")
+
     private String authorEmail;
     @Column(name = "author_phone_no")
+
     private String authorMobile;
 }

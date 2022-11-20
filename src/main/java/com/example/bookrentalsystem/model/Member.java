@@ -22,9 +22,11 @@ public class Member {
     private  Integer memberId;
 
     @Column(name = "email")
+
     private  String email;
 
     @Column(name = "name")
+
     private String name;
 
     @Column(name = "mobile_no")

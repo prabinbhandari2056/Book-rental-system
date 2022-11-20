@@ -36,6 +36,9 @@ public class BookTransaction {
     @Column(name = "to_date")
     private LocalDate toDate;
 
+    @Column(name = "return_date")
+    private LocalDate returnDate;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "rent_status")
     private RentType rentType;

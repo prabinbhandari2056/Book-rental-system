@@ -55,6 +55,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public void saveBookDetails(BookDetailRequestPojo bookDetailRequestPojo) throws Exception {
 
         Book book;
