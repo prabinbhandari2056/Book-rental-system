@@ -1,5 +1,6 @@
 package com.example.bookrentalsystem.service.user;
 
+import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.model.User;
 import com.example.bookrentalsystem.pojo.user.UserDetailRequestPojo;
 import org.apache.ibatis.annotations.Select;
@@ -17,5 +18,7 @@ public interface UserService {
     public List<User> getUser();
     void saveUserDetails(UserDetailRequestPojo userDetailRequestPojo);
     Optional<User> findById(Integer id);
+
+    void deleteUserById(Integer userId) throws AppException;
 
 }

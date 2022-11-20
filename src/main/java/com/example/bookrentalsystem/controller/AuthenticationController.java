@@ -3,6 +3,8 @@ package com.example.bookrentalsystem.security;
 
 import com.example.bookrentalsystem.model.authentication.AuthenticationRequest;
 import com.example.bookrentalsystem.model.authentication.AuthenticationResponse;
+import com.example.bookrentalsystem.security.AuthenticationProvider;
+import com.example.bookrentalsystem.security.CustomUserDetailsService;
 import com.example.bookrentalsystem.util.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,26 +14,18 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+
 @CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("bookrental/authenticate")
 class AuthenticationController {
-
-
     @Autowired
     private AuthenticationProvider authenticationManager;
-
     @Autowired
     private JwtUtil jwtTokenUtil;
-
     @Autowired
     private CustomUserDetailsService userDetailsService;
-
-    @RequestMapping({"/hello"})
-    public String firstPage() {
-        return "Hello World";
-    }
-
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @PostMapping("")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
         try {

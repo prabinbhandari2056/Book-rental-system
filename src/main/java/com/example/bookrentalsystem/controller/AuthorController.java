@@ -1,5 +1,6 @@
 package com.example.bookrentalsystem.controller;
 
+import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.pojo.api.ApiResponse;
 import com.example.bookrentalsystem.pojo.api.BaseController;
 import com.example.bookrentalsystem.pojo.author.AuthorDetailRequestPojo;
@@ -41,5 +42,11 @@ public class AuthorController extends BaseController {
     @GetMapping("/{authorid}")
     public ApiResponse getAuthorById(@PathVariable(name = "authorid") Integer authorId) {
         return success(get("data.get","Author"), authorService.getAuthorById(authorId));
+    }
+
+    @DeleteMapping("/{authorid}")
+    public ApiResponse deleteAuthorById(@PathVariable(name="authorid") Integer authorId) throws AppException {
+        authorService.deleteAuthorById(authorId);
+        return success(get("data.delete"," Author"),null);
     }
 }

@@ -45,4 +45,9 @@ public class BookTransactionController extends BaseController {
     public ApiResponse getBookTransactionByMemberId(@PathVariable(name = "memberid") Integer memberId) {
         return success(get("data.get","Book Transaction"), bookTransactionService.getBookTransactionById(memberId));
     }
+
+    public ApiResponse deleteBookTransactionById(@PathVariable(name = "bookTransactionId") Integer bookTransactionId) throws AppException {
+        bookTransactionService.deleteBookTransactionById(bookTransactionId);
+        return success(get("data.delete"," Book transaction"),null);
+    }
 }
