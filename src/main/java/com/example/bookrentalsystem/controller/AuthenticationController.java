@@ -1,8 +1,10 @@
-package com.example.bookrentalsystem.security;
+package com.example.bookrentalsystem.controller;
 
 
 import com.example.bookrentalsystem.model.authentication.AuthenticationRequest;
 import com.example.bookrentalsystem.model.authentication.AuthenticationResponse;
+import com.example.bookrentalsystem.security.AuthenticationProvider;
+import com.example.bookrentalsystem.security.CustomUserDetailsService;
 import com.example.bookrentalsystem.util.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("bookrental/authenticate")
 class AuthenticationController {
 
 
@@ -26,12 +29,8 @@ class AuthenticationController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    @RequestMapping({"/hello"})
-    public String firstPage() {
-        return "Hello World";
-    }
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @PostMapping
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
         try {
