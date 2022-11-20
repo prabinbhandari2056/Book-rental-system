@@ -105,7 +105,7 @@ public class BookTransactionServiceImpl implements BookTransactionService {
       }
        else if (bookTransactionDetailRequestPojo.getRentType().toString().equalsIgnoreCase("RETURN")) {
             LocalDate returnDate =java.time.LocalDate.now();
-           bookTransactionRepository.updateBookReturnTransaction(bookTransactionDetailRequestPojo.getBookId(),bookTransactionDetailRequestPojo.getMemberId(),returnDate);
+           bookTransactionRepository.updateBookReturnTransaction(returnDate,bookTransactionDetailRequestPojo.getBookId(),bookTransactionDetailRequestPojo.getMemberId());
            bookRepository.updateBookReturn(bookTransactionDetailRequestPojo.getBookId());
       }
     }
@@ -120,7 +120,7 @@ public class BookTransactionServiceImpl implements BookTransactionService {
     @Override
     public void addReturnTransaction(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) {
         LocalDate returnDate=java.time.LocalDate.now();
-        bookTransactionRepository.updateBookReturnTransaction(bookTransactionDetailRequestPojo.getBookId(),bookTransactionDetailRequestPojo.getMemberId(), returnDate);
+        bookTransactionRepository.updateBookReturnTransaction(returnDate,bookTransactionDetailRequestPojo.getBookId(),bookTransactionDetailRequestPojo.getMemberId());
         bookRepository.updateBookReturn(bookTransactionDetailRequestPojo.getBookId());
     }
 

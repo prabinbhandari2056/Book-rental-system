@@ -24,7 +24,7 @@ public class Book {
     private Integer bookId;
 
     @Column(name = "book_name")
-    @Size(max = 100,min = 5)
+
     private String bookName;
 
     @Column(name = "no_of_pages")
@@ -32,7 +32,6 @@ public class Book {
 
     @Column(name = "isbn")
 
-    @Size(max = 30)
     private String isbn;
 
     @Column(name = "rating")
@@ -55,8 +54,6 @@ public class Book {
     @JoinColumn(name = "category_id", referencedColumnName = "category_id", foreignKey = @ForeignKey(name = "FK_book_category"))
     private  Category category;
 
-//    @OneToMany
-//    @JoinColumn( name = "author_id", referencedColumnName = "author_id", foreignKey = @ForeignKey(name = "FK_book_author"))
 
     @ManyToMany(targetEntity = Author.class,cascade = CascadeType.ALL)
     @JoinColumn(name ="author_id",referencedColumnName = "author_id")

@@ -15,8 +15,8 @@ public interface BookTransactionRepository extends JpaRepository<BookTransaction
 
 
     @Modifying
-     @Query(value = "update  tbl_book_transaction set rent_status ='RETURN' and retutn_date=?3 where \"book_id\"=?1 and\"member_id\"=?2 and rent_status='RENT'",nativeQuery = true)
-    void updateBookReturnTransaction(Integer bookId, Integer memberId, LocalDate returnDate);
+     @Query(value = "update  tbl_book_transaction set rent_status ='RETURN',return_date=?1 where \"book_id\"=?2 and\"member_id\"=?3 and rent_status='RENT'",nativeQuery = true)
+    void updateBookReturnTransaction(LocalDate returnDate,Integer bookId, Integer memberId);
 
 //    @Select("select * from tbl_book_transaction where \"member_id\"=#{memberId} and \"book_id\"=#{book_id} and rent_status='RENT'")
 //    Optional<Member> findMemberById(Integer memberId,Integer bookId);
