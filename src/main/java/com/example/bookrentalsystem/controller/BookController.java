@@ -1,5 +1,6 @@
 package com.example.bookrentalsystem.controller;
 
+import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.pojo.api.ApiResponse;
 import com.example.bookrentalsystem.pojo.api.BaseController;
 import com.example.bookrentalsystem.pojo.book.BookDetailRequestPojo;
@@ -48,6 +49,12 @@ public class BookController extends BaseController {
     public ApiResponse updateBookStock(@RequestBody @Valid BookDetailRequestPojo bookDetailRequestPojo){
         bookService.updateBookStock(bookDetailRequestPojo);
         return success(get("data.update.stock","Book"), null);
+    }
+
+    @DeleteMapping("/{bookid}")
+    public ApiResponse deleteBookById(@PathVariable(name = "bookid")Integer bookId) throws AppException {
+        bookService.deleteBookById(bookId);
+        return success(get("data.delete","Book"),null);
     }
 }
 

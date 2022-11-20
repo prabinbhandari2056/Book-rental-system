@@ -1,5 +1,6 @@
 package com.example.bookrentalsystem.service.category;
 
+import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.mapper.CategoryDetailMapper;
 import com.example.bookrentalsystem.model.Category;
 import com.example.bookrentalsystem.pojo.category.CategoryDetailRequestPojo;
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{
@@ -32,6 +34,16 @@ public class CategoryServiceImpl implements CategoryService{
         return categoryRepository.findAll();
     }
 
+    @Override
+    public void deleteCateoryById(Integer categoryId) throws AppException {
+        Optional<Category> exists=categoryRepository.findById(categoryId);
+        if (!exists.isPresent()){
+            throw new AppException("Category does not exist by given "+ categoryId + " category id");
+        }
+        else if (exists.isPresent()){
+            categoryRepository.deleteById(categoryId);
+        }
+    }
     @Override
     public Object getCategoryById(Integer categoryId) {
         return categoryRepository.findById(categoryId);
