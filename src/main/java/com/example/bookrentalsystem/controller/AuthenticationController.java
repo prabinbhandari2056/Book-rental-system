@@ -18,18 +18,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("bookrental/authenticate")
 class AuthenticationController {
-
-
     @Autowired
     private AuthenticationProvider authenticationManager;
-
     @Autowired
     private JwtUtil jwtTokenUtil;
-
     @Autowired
     private CustomUserDetailsService userDetailsService;
-
-
     @PostMapping("")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
