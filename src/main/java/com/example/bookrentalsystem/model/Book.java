@@ -24,41 +24,36 @@ public class Book {
     private Integer bookId;
 
     @Column(name = "book_name")
-    @NotNull
-    @Size(max = 100,min = 5)
+
     private String bookName;
 
     @Column(name = "no_of_pages")
-    @NotNull
     private Integer noOfPages;
 
     @Column(name = "isbn")
-    @NotNull
-    @Size(max = 30)
+
     private String isbn;
 
     @Column(name = "rating")
-    @NotNull
+
     private Double rating;
 
     @Column(name = "stock_count")
-    @NotNull
+
     private Integer stockCount;
 
     @Column(name = "published_date")
-    @NotNull
+
     private LocalDate publishedDate;
 
     @Column(name = "photo",columnDefinition = "TEXT")
-    @NotNull
+
     private String imagePath;
 
     @ManyToOne(targetEntity = Category.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id", foreignKey = @ForeignKey(name = "FK_book_category"))
     private  Category category;
 
-//    @OneToMany
-//    @JoinColumn( name = "author_id", referencedColumnName = "author_id", foreignKey = @ForeignKey(name = "FK_book_author"))
 
     @ManyToMany(targetEntity = Author.class,cascade = CascadeType.ALL)
     @JoinColumn(name ="author_id",referencedColumnName = "author_id")

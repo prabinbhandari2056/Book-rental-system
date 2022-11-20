@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface BookTransactionRepository extends JpaRepository<BookTransaction,Integer> {
@@ -14,8 +15,8 @@ public interface BookTransactionRepository extends JpaRepository<BookTransaction
 
 
     @Modifying
-     @Query(value = "update  tbl_book_transaction set rent_status ='RETURN' where \"book_id\"=?1 and\"member_id\"=?2 and rent_status='RENT'",nativeQuery = true)
-    void updateBookReturnTransaction(Integer bookId, Integer memberId);
+     @Query(value = "update  tbl_book_transaction set rent_status ='RETURN',return_date=?1 where \"book_id\"=?2 and\"member_id\"=?3 and rent_status='RENT'",nativeQuery = true)
+    void updateBookReturnTransaction(LocalDate returnDate,Integer bookId, Integer memberId);
 
 //    @Select("select * from tbl_book_transaction where \"member_id\"=#{memberId} and \"book_id\"=#{book_id} and rent_status='RENT'")
 //    Optional<Member> findMemberById(Integer memberId,Integer bookId);
@@ -23,9 +24,9 @@ public interface BookTransactionRepository extends JpaRepository<BookTransaction
 //    @Select("select * from tbl_book_transaction where \"book_id\"=#{bookId}")
 //    Optional<Object> finBookById(Integer bookId);
 
-//    @Modifying
-//    @Query(value = "update  tbl_book_transaction set rent_status ='RETURN' where \"book_id\"=?1 and\"member_id\"=?2 and rent_status='RENT'",nativeQuery = true)
-//    void updateBookTransactionReturn(Integer bookId, Integer memberId);
+
+    @Query(value = "select * from tbl_book_transaction where \"member_id\"=?1",nativeQuery = true)
+    BookTransaction getBookTransactionByMemberId(Integer memberId);
 
 
 //    BookTransaction findBookTransactionByBookAndMemberId(Integer bookTransactionId, @NotNull Integer memberId);

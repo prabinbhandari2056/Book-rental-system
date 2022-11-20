@@ -23,10 +23,9 @@ public class User {
     private Integer user_id;
 
     @Column(name = "user_name")
-    @NotNull
+
     private String userName;
 
-    @NotNull
     @Column(name = "password")
     private String password;
 

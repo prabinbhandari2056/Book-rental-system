@@ -23,12 +23,12 @@ public class Author {
     @Column(name = "author_id")
     private Integer authorId;
     @Column(name = "author_name")
-    @NotNull
+
     private  String authorName;
     @Column(name = "author_email")
-    @NotNull
+
     private String authorEmail;
     @Column(name = "author_phone_no")
-    @NotNull
+
     private String authorMobile;
 }
