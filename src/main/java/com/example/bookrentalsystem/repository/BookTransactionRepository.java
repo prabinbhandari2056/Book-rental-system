@@ -26,7 +26,7 @@ public interface BookTransactionRepository extends JpaRepository<BookTransaction
 
 
     @Query(value = "select * from tbl_book_transaction where \"member_id\"=?1",nativeQuery = true)
-    BookTransaction getBookTransactionByMemberId(Integer memberId);
+    List<BookTransaction> getBookTransactionByMemberId(Integer memberId);
 
 
 //    BookTransaction findBookTransactionByBookAndMemberId(Integer bookTransactionId, @NotNull Integer memberId);

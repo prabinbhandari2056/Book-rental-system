@@ -111,7 +111,7 @@ public class BookTransactionServiceImpl implements BookTransactionService {
     }
 
     @Override
-    public BookTransaction getBookTransactionByMemberId(Integer memberId) {
+    public List<BookTransaction> getBookTransactionByMemberId(Integer memberId) {
             return bookTransactionRepository.getBookTransactionByMemberId(memberId);
 
     }
