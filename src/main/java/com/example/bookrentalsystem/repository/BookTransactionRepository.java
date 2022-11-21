@@ -5,16 +5,13 @@ import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailRe
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
 import java.time.LocalDate;
 import java.util.List;
 
 public interface BookTransactionRepository extends JpaRepository<BookTransaction,Integer> {
     BookTransactionDetailRequestPojo bookTransactiondetailRequestPojo = new BookTransactionDetailRequestPojo();
     List<BookTransaction> findAll();
-
-
-    @Modifying
+     @Modifying
      @Query(value = "update  tbl_book_transaction set rent_status ='RETURN',return_date=?1 where \"book_id\"=?2 and\"member_id\"=?3 and rent_status='RENT'",nativeQuery = true)
     void updateBookReturnTransaction(LocalDate returnDate,Integer bookId, Integer memberId);
 
@@ -23,7 +20,6 @@ public interface BookTransactionRepository extends JpaRepository<BookTransaction
 //
 //    @Select("select * from tbl_book_transaction where \"book_id\"=#{bookId}")
 //    Optional<Object> finBookById(Integer bookId);
-
 
     @Query(value = "select * from tbl_book_transaction where \"member_id\"=?1",nativeQuery = true)
     List<BookTransaction> getBookTransactionByMemberId(Integer memberId);
