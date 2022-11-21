@@ -62,7 +62,6 @@ public class BookTransactionServiceImpl implements BookTransactionService {
         return bookTransactionRepository.findAll();
     }
 
-
     @Transactional
     @Override
     public void addNewTransaction(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException {
@@ -113,9 +112,7 @@ public class BookTransactionServiceImpl implements BookTransactionService {
     @Override
     public List<BookTransaction> getBookTransactionByMemberId(Integer memberId) {
             return bookTransactionRepository.getBookTransactionByMemberId(memberId);
-
     }
-
     @Transactional
     @Override
     public void addReturnTransaction(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) {
