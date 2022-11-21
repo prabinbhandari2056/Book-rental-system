@@ -30,25 +30,29 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(myUserDetailsService);
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/bookrental/authenticate","/bookrental/user","/swagger-ui/**","/v3/api-docs/**").permitAll()
+                .authorizeRequests().antMatchers("/bookrental/authenticate", "/bookrental/user", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 .anyRequest().authenticated().and()
-                        .addFilter(corsConfiguration())
+                .addFilter(corsConfiguration())
                 .exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        httpSecurity.addFilterBefore(jwtRequestFilter,UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
     @Bean
     CorsFilter corsConfiguration() {
         UrlBasedCorsConfigurationSource urlBasedCors = new UrlBasedCorsConfigurationSource();
@@ -63,6 +67,6 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
         corsConfig.addAllowedMethod("DELETE");
         corsConfig.addAllowedMethod("PATCH");
         urlBasedCors.registerCorsConfiguration("/**", corsConfig);
-        return new CorsFilter( urlBasedCors);
+        return new CorsFilter(urlBasedCors);
     }
 }
