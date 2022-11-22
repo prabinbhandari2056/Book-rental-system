@@ -51,6 +51,11 @@ public class BookController extends BaseController {
         return success(get("data.update.stock","Book"), null);
     }
 
+    @GetMapping("get-book-id-name")
+    public ApiResponse getBookIdName(){
+        return  success(get("data.get","Book"),bookService.getBookIdName());
+            }
+
     @DeleteMapping("/{bookid}")
     public ApiResponse deleteBookById(@PathVariable(name = "bookid")Integer bookId) throws AppException {
         bookService.deleteBookById(bookId);
