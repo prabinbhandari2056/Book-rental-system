@@ -18,4 +18,6 @@ public interface BookService {
     void updateBookStock(BookDetailRequestPojo bookDetailRequestPojo);
 
     void deleteBookById(Integer bookId) throws AppException;
+
+    List<Book> getBookIdName();
 }
