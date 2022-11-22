@@ -12,7 +12,7 @@ import javax.validation.Valid;
 /**
  * This controller returns book details and save book details using for data.
  */
-@CrossOrigin(origins = "*")
+
 
 @RestController
 @RequestMapping("bookrental/book")

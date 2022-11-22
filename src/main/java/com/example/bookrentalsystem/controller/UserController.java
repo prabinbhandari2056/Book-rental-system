@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@CrossOrigin(origins = "*")
+
 @RestController
 @RequestMapping("bookrental/user")
 public class UserController extends BaseController {

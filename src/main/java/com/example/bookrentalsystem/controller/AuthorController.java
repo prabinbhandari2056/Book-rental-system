@@ -14,7 +14,7 @@ import javax.validation.Valid;
 /**
  * This class is used to save and update author.
  */
-@CrossOrigin(origins = "*")
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("bookrental/author")
