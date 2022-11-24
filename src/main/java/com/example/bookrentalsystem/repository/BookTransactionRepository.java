@@ -2,6 +2,7 @@ package com.example.bookrentalsystem.repository;
 
 import com.example.bookrentalsystem.model.BookTransaction;
 import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailResponsePojo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,8 +26,6 @@ public interface BookTransactionRepository extends JpaRepository<BookTransaction
 //    Optional<Object> finBookById(Integer bookId);
 
 
-    @Query(value = "select * from tbl_book_transaction where \"member_id\"=?1",nativeQuery = true)
-    List<BookTransaction> getBookTransactionByMemberId(Integer memberId);
 
 
 //    BookTransaction findBookTransactionByBookAndMemberId(Integer bookTransactionId, @NotNull Integer memberId);

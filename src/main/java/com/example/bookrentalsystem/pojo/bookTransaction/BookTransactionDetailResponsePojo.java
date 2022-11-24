@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -19,21 +20,22 @@ public class BookTransactionDetailResponsePojo {
 
 
     private Integer bookTransactionId;
-
-    private Integer bookId;
-
+    private String rentStatus;
     private String code;
-
-    private Date fromDate;
-
-    private Date toDate;
-
-
-    private RentType rentType;
-
-
+    private LocalDate fromDate;
+    private LocalDate toDate;
+    private LocalDate returnDate;
     private Integer memberId;
+    private String memberName;
+    private Integer bookId;
+    private String bookName;
 
-    private String status;
+
+
+
+
+
+
+
 }
 

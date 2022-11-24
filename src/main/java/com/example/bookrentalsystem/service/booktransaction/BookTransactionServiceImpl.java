@@ -10,6 +10,7 @@ import com.example.bookrentalsystem.model.BookTransaction;
 import com.example.bookrentalsystem.model.Member;
 import com.example.bookrentalsystem.pojo.api.ApiResponse;
 import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailResponsePojo;
 import com.example.bookrentalsystem.repository.BookRepository;
 import com.example.bookrentalsystem.repository.BookTransactionRepository;
 import com.example.bookrentalsystem.repository.MemberRepository;
@@ -111,8 +112,8 @@ public class BookTransactionServiceImpl implements BookTransactionService {
     }
 
     @Override
-    public List<BookTransaction> getBookTransactionByMemberId(Integer memberId) {
-            return bookTransactionRepository.getBookTransactionByMemberId(memberId);
+    public List<BookTransactionDetailResponsePojo> getBookTransactionByMemberId(Integer memberId) {
+                return bookTransactionDetailMapper.getBookTransactionByMemberId(memberId);
 
     }
 
