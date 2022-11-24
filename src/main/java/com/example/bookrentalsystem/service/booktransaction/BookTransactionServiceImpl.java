@@ -10,6 +10,7 @@ import com.example.bookrentalsystem.model.BookTransaction;
 import com.example.bookrentalsystem.model.Member;
 import com.example.bookrentalsystem.pojo.api.ApiResponse;
 import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailResponsePojo;
 import com.example.bookrentalsystem.repository.BookRepository;
 import com.example.bookrentalsystem.repository.BookTransactionRepository;
 import com.example.bookrentalsystem.repository.MemberRepository;
@@ -62,6 +63,7 @@ public class BookTransactionServiceImpl implements BookTransactionService {
         return bookTransactionRepository.findAll();
     }
 
+
     @Transactional
     @Override
     public void addNewTransaction(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException {
@@ -104,24 +106,17 @@ public class BookTransactionServiceImpl implements BookTransactionService {
       }
        else if (bookTransactionDetailRequestPojo.getRentType().toString().equalsIgnoreCase("RETURN")) {
             LocalDate returnDate =java.time.LocalDate.now();
-          Boolean rentStatus = bookTransactionDetailMapper.getReturnStatus(bookTransactionDetailRequestPojo.getMemberId(),bookTransactionDetailRequestPojo.getBookId());
-          if (rentStatus==null) {
-              throw new AppException("No Book Rented for given member id from the given book id.");
-
-          }
-          else if (!rentStatus) {
-              throw new AppException("Already returned");
-
-          }
-          bookTransactionRepository.updateBookReturnTransaction(returnDate,bookTransactionDetailRequestPojo.getBookId(),bookTransactionDetailRequestPojo.getMemberId());
+           bookTransactionRepository.updateBookReturnTransaction(returnDate,bookTransactionDetailRequestPojo.getBookId(),bookTransactionDetailRequestPojo.getMemberId());
            bookRepository.updateBookReturn(bookTransactionDetailRequestPojo.getBookId());
       }
     }
 
     @Override
-    public List<BookTransaction> getBookTransactionByMemberId(Integer memberId) {
-            return bookTransactionRepository.getBookTransactionByMemberId(memberId);
+    public List<BookTransactionDetailResponsePojo> getBookTransactionByMemberId(Integer memberId) {
+                return bookTransactionDetailMapper.getBookTransactionByMemberId(memberId);
+
     }
+
     @Transactional
     @Override
     public void addReturnTransaction(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) {
