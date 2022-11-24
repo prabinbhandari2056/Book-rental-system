@@ -13,7 +13,7 @@ public interface BookTransactionService {
 
     void addNewTransaction(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException;
 
-    BookTransaction getBookTransactionByMemberId(Integer memberId);
+    List <BookTransaction> getBookTransactionByMemberId(Integer memberId);
 
     void addReturnTransaction(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo);
 
