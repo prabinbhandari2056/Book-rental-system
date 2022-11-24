@@ -105,7 +105,16 @@ public class BookTransactionServiceImpl implements BookTransactionService {
       }
        else if (bookTransactionDetailRequestPojo.getRentType().toString().equalsIgnoreCase("RETURN")) {
             LocalDate returnDate =java.time.LocalDate.now();
-           bookTransactionRepository.updateBookReturnTransaction(returnDate,bookTransactionDetailRequestPojo.getBookId(),bookTransactionDetailRequestPojo.getMemberId());
+          Boolean rentStatus = bookTransactionDetailMapper.getReturnStatus(bookTransactionDetailRequestPojo.getMemberId(),bookTransactionDetailRequestPojo.getBookId());
+          if (rentStatus==null) {
+              throw new AppException("No Book Rented for given member id from the given book id.");
+
+          }
+          else if (!rentStatus) {
+              throw new AppException("Already returned");
+
+          }
+          bookTransactionRepository.updateBookReturnTransaction(returnDate,bookTransactionDetailRequestPojo.getBookId(),bookTransactionDetailRequestPojo.getMemberId());
            bookRepository.updateBookReturn(bookTransactionDetailRequestPojo.getBookId());
       }
     }
