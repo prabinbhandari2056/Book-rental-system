@@ -1,7 +1,6 @@
 package com.example.bookrentalsystem.service.booktransaction;
 
 
-import com.example.bookrentalsystem.enums.RentType;
 import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.mapper.BookDetailMapper;
 import com.example.bookrentalsystem.mapper.BookTransactionDetailMapper;
@@ -10,6 +9,7 @@ import com.example.bookrentalsystem.model.BookTransaction;
 import com.example.bookrentalsystem.model.Member;
 import com.example.bookrentalsystem.pojo.api.ApiResponse;
 import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailResponsePojo;
 import com.example.bookrentalsystem.repository.BookRepository;
 import com.example.bookrentalsystem.repository.BookTransactionRepository;
 import com.example.bookrentalsystem.repository.MemberRepository;
@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +36,7 @@ public class BookTransactionServiceImpl implements BookTransactionService {
     private final BookDetailMapper bookDetailMapper;
 
     private final ObjectMapper objectMapper;
+
 
 
     public BookTransactionServiceImpl(BookRepository bookRepository, MemberRepository memberRepository, BookTransactionRepository bookTransactionRepository,
@@ -120,8 +120,8 @@ public class BookTransactionServiceImpl implements BookTransactionService {
     }
 
     @Override
-    public List<BookTransaction> getBookTransactionByMemberId(Integer memberId) {
-            return bookTransactionRepository.getBookTransactionByMemberId(memberId);
+    public List<BookTransactionDetailResponsePojo> getBookTransactionByMemberId(Integer memberId) {
+            return bookTransactionDetailMapper.getBookTransactionByMemberId(memberId);
 
     }
 

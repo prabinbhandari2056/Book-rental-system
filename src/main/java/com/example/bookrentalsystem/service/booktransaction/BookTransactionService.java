@@ -4,6 +4,7 @@ package com.example.bookrentalsystem.service.booktransaction;
 import com.example.bookrentalsystem.globalException.AppException;
 import com.example.bookrentalsystem.model.BookTransaction;
 import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailRequestPojo;
+import com.example.bookrentalsystem.pojo.bookTransaction.BookTransactionDetailResponsePojo;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface BookTransactionService {
 
     void addNewTransaction(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo) throws AppException;
 
-    List <BookTransaction> getBookTransactionByMemberId(Integer memberId);
+    List<BookTransactionDetailResponsePojo> getBookTransactionByMemberId(Integer memberId);
 
     void addReturnTransaction(BookTransactionDetailRequestPojo bookTransactionDetailRequestPojo);
 
